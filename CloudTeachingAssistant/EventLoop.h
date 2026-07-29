@@ -22,8 +22,8 @@ public:
 	void Quit();
 
 private:
-	uint32_t m_nThreadNums = -1; //线程数量
 	uint32_t m_nReactorIndex = 1;//reactor索引
+	uint32_t m_nThreadNums = -1; //线程数量
 	std::vector<std::shared_ptr<CReactorBase>> m_vecReactors; //存放reactor的vector容器
 	std::vector<std::shared_ptr<std::thread>> m_vecThreads; //存放线程
 };
