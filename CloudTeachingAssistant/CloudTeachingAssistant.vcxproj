@@ -78,6 +78,7 @@
     <ClCompile Include="BufferReader.cpp" />
     <ClCompile Include="BufferWriter.cpp" />
     <ClCompile Include="ReactorEpoll.cpp" />
+    <ClCompile Include="EventLoop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReactorBase.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="BufferWriter.h" />
     <ClInclude Include="Channel.h" />
     <ClInclude Include="ReactorEpoll.h" />
+    <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />
     <ClInclude Include="TcpSocket.h" />
     <ClInclude Include="Timer.h" />
