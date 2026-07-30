@@ -1,10 +1,17 @@
 #include "TcpConnection.h"
+#include <iostream>
 
 CTcpConnection::CTcpConnection(CReactorBase* reactor, int nSockFd)
 	: m_reactor(reactor), m_readBuf(new CBufferReader()),
 	m_writeBuf(new CBufferWriter(500)), m_ptrChannel(new CChannel(nSockFd))
 {
 	m_bIsClosed = false;
+
+	m_reactor->AddTimer([this]() {
+		char buffer[] = "hello i am server";
+		this->Send(buffer, sizeof(buffer));
+		return true; 
+		}, 1000);
 
 	m_ptrChannel->SetReadCallback([this]() {this->HandleRead(); });
 	m_ptrChannel->SetWriteCallback([this]() {this->HandleWrite(); });
