@@ -40,7 +40,7 @@ bool CTcpServer::bStart(std::string strIP, uint16_t nPort)
 		m_bIsStarted = true;
 	}
 
-	return false;
+	return true;
 }
 
 void CTcpServer::Stop()
