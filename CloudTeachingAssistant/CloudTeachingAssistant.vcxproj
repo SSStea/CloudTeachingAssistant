@@ -83,6 +83,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReactorBase.cpp" />
     <ClCompile Include="TcpConnection.cpp" />
+    <ClCompile Include="TcpServer.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -95,6 +96,7 @@
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />
     <ClInclude Include="TcpConnection.h" />
+    <ClInclude Include="TcpServer.h" />
     <ClInclude Include="TcpSocket.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

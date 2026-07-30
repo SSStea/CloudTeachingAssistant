@@ -33,6 +33,8 @@ public:
 	void disConnect();
 
 protected:
+	friend class CTcpServer;
+
 	bool m_bIsClosed;
 	CReactorBase* m_reactor;
 	std::unique_ptr<CBufferReader> m_readBuf;
@@ -44,6 +46,8 @@ protected:
 	virtual void HandleWrite();
 	virtual void HandleClose();
 	virtual void HandleError();
+
+	void SetDisconnectCallback(const disConnectCallback& cb) { m_disConnectCb = cb; }
 
 private:
 	std::shared_ptr<CChannel> m_ptrChannel = nullptr;
