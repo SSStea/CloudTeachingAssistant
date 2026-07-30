@@ -88,6 +88,13 @@ void CTcpConnection::HandleRead()
 			this->Close();
 		}
 	}
+
+	std::string strData;
+	uint32_t nSize = m_readBuf->nReadFromBuffer(strData);
+	if (nSize > 0)
+	{
+		this->Send(strData.c_str(), nSize);
+	}
 }
 
 void CTcpConnection::HandleWrite()
