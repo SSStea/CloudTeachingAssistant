@@ -132,7 +132,7 @@ void CTcpConnection::HandleError()
 
 void CTcpConnection::Close()
 {
-	if (m_bIsClosed)
+	if (!m_bIsClosed)
 	{
 		m_bIsClosed = true;
 		m_reactor->RemoveChannel(m_ptrChannel);
