@@ -24,3 +24,6 @@
 
 # Generated codec outputs
 **/output.*
+
+# Local test projects
+/CloudTeachingAssistantTest/
