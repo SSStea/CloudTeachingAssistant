@@ -114,3 +114,45 @@ const char* CBufferReader::pBeginWrite() const
 {
 	return pBegin() + m_nWriteIndex;
 }
+
+uint32_t ReadUint32BE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint32_t value = (p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
+	return value;
+}
+
+uint32_t ReadUint32LE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint32_t value = (p[3] << 24) | (p[2] << 16) | (p[1] << 8) | p[0];
+	return value;
+}
+
+uint32_t ReadUint24BE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint32_t value = (p[0] << 16) | (p[1] << 8) | p[2];
+	return value;
+}
+
+uint32_t ReadUint24LE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint32_t value = (p[2] << 16) | (p[1] << 8) | p[0];
+	return value;
+}
+
+uint16_t ReadUint16BE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint16_t value = (p[0] << 8) | p[1];
+	return value;
+}
+
+uint16_t ReadUint16LE(char* data)
+{
+	uint8_t* p = (uint8_t*)data;
+	uint16_t value = (p[1] << 8) | p[0];
+	return value;
+}

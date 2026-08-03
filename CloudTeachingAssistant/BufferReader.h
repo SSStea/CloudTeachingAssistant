@@ -4,6 +4,13 @@
 #include <string>
 #include <sys/socket.h>
 
+uint32_t ReadUint32BE(char* data);//大端读32位
+uint32_t ReadUint32LE(char* data);//小端读32位
+uint32_t ReadUint24BE(char* data);//24位
+uint32_t ReadUint24LE(char* data);
+uint16_t ReadUint16BE(char* data);//16位
+uint16_t ReadUint16LE(char* data);
+
 class CBufferReader
 {
 public:
