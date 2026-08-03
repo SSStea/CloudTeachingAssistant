@@ -34,6 +34,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
+    <ClCompile Include="RtmptHandshake.cpp">
+      <Filter>RtmpServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -69,10 +72,16 @@
     <ClInclude Include="Timer.h">
       <Filter>EdoyunNet</Filter>
     </ClInclude>
+    <ClInclude Include="RtmptHandshake.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EdoyunNet">
       <UniqueIdentifier>{d30f4a63-80a3-4cfc-a862-46b03861a82f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RtmpServer">
+      <UniqueIdentifier>{38022f2d-40d4-4148-b678-8d9013bd6ae7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

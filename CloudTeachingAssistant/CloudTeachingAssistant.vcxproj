@@ -82,6 +82,7 @@
     <ClCompile Include="EventLoop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReactorBase.cpp" />
+    <ClCompile Include="RtmptHandshake.cpp" />
     <ClCompile Include="TcpConnection.cpp" />
     <ClCompile Include="TcpServer.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="ReactorEpoll.h" />
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />
+    <ClInclude Include="RtmptHandshake.h" />
     <ClInclude Include="TcpConnection.h" />
     <ClInclude Include="TcpServer.h" />
     <ClInclude Include="TcpSocket.h" />
