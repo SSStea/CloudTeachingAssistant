@@ -84,3 +84,45 @@ int CBufferWriter::nSend(int sockfd)
 
 	return (int)nBytesSend;
 }
+
+void WriteUint32BE(char* p, uint32_t value)
+{
+	p[0] = value >> 24;//右移24位
+	p[1] = value >> 16;
+	p[2] = value >> 8;
+	p[3] = value & 0xff;
+}
+
+void WriteUint32LE(char* p, uint32_t value)
+{
+	p[0] = value & 0xff;
+	p[1] = value >> 8;
+	p[2] = value >> 16;
+	p[3] = value >> 24;//右移24位
+}
+
+void WriteUint24BE(char* p, uint32_t value)
+{
+	p[0] = value >> 16;//右移16位
+	p[1] = value >> 8;
+	p[2] = value & 0xff;
+}
+
+void WriteUint24LE(char* p, uint32_t value)
+{
+	p[0] = value & 0xff;
+	p[1] = value >> 8;
+	p[2] = value >> 16;//右移16位
+}
+
+void WriteUint16BE(char* p, uint32_t value)
+{
+	p[0] = value >> 8;//右移8位
+	p[1] = value & 0xff;
+}
+
+void WriteUint16LE(char* p, uint32_t value)
+{
+	p[0] = value & 0xff;
+	p[1] = value >> 8;//右移8位
+}

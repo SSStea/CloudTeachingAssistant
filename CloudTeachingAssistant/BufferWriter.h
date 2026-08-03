@@ -5,11 +5,11 @@
 #include <sys/socket.h>
 #include <errno.h>
 
-void WriteUint32BE(char* p, uint32_t value);
-void WriteUint32LE(char* p, uint32_t value);
-void WriteUint24BE(char* p, uint32_t value);
+void WriteUint32BE(char* p, uint32_t value);//大端写4字节
+void WriteUint32LE(char* p, uint32_t value);//小端写4字节
+void WriteUint24BE(char* p, uint32_t value);//3字节
 void WriteUint24LE(char* p, uint32_t value);
-void WriteUint16BE(char* p, uint32_t value);
+void WriteUint16BE(char* p, uint32_t value);//2字节
 void WriteUint16LE(char* p, uint32_t value);
 
 class CBufferWriter
