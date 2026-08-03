@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Acceptor.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferReader.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferWriter.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="EventLoop.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactorBase.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactorEpoll.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpConnection.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpServer.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpSocket.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>EdoyunNet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Acceptor.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferReader.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferWriter.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="Channel.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="EventLoop.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactorBase.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactorEpoll.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpConnection.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpServer.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSocket.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>EdoyunNet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="EdoyunNet">
+      <UniqueIdentifier>{d30f4a63-80a3-4cfc-a862-46b03861a82f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
