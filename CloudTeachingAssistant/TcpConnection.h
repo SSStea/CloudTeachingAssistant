@@ -21,7 +21,7 @@ public:
 
 	//这里的读是把网络套接字中的数据读进缓冲区里
 	inline void setReadCallback(const readCallback& cb) { m_readCb = cb; }
-	inline void setCoseCallback(const closeCallback& cb) { m_closeCb = cb; }
+	inline void setCloseCallback(const closeCallback& cb) { m_closeCb = cb; }
 	
 	inline bool bIsClosed() const { return m_bIsClosed; }
 
