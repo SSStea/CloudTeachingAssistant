@@ -98,7 +98,7 @@ int CRtmpChunk::nCreateChunk(uint32_t nCsId, RtmpMessage& rtmpInMsg, char* pBuf,
 		if (rtmpInMsg.nLength > m_nOutChunkSize)
 		{
 			//把消息中的载荷数据按输出块大小复制到pBuf中
-			memcpy(pBuf + nBufOffset, rtmpInMsg.playload.get() + nPayloadOffset, m_nOutChunkSize);
+			memcpy(pBuf + nBufOffset, rtmpInMsg.pPlayload.get() + nPayloadOffset, m_nOutChunkSize);
 			nPayloadOffset += m_nOutChunkSize;
 			nBufOffset += m_nOutChunkSize;
 			rtmpInMsg.nLength -= m_nOutChunkSize;
@@ -112,7 +112,7 @@ int CRtmpChunk::nCreateChunk(uint32_t nCsId, RtmpMessage& rtmpInMsg, char* pBuf,
 		}
 		else//最后一个包
 		{
-			memcpy(pBuf + nBufOffset, rtmpInMsg.playload.get() + nPayloadOffset, rtmpInMsg.nLength);
+			memcpy(pBuf + nBufOffset, rtmpInMsg.pPlayload.get() + nPayloadOffset, rtmpInMsg.nLength);
 			nBufOffset += rtmpInMsg.nLength;
 			rtmpInMsg.nLength = 0;
 			break;
@@ -193,10 +193,10 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 		uint32_t nLength = ReadUint24BE((char*)header.nLength);
 		//如果长度变化，或者还没有负载缓冲区，就重新分配内存
 		//智能指针负责在消息不再使用时自动调用 delete[]
-		if (rtmpMsg.nLength != nLength || !rtmpMsg.playload)
+		if (rtmpMsg.nLength != nLength || !rtmpMsg.pPlayload)
 		{
 			rtmpMsg.nLength = nLength;
-			rtmpMsg.playload.reset(new char[rtmpMsg.nLength], std::default_delete<char[]>());
+			rtmpMsg.pPlayload.reset(new char[rtmpMsg.nLength], std::default_delete<char[]>());
 		}
 		//开始接收一条新消息，将当前负载写入位置重置到0。
 		rtmpMsg.nIndex = 0;
@@ -295,7 +295,7 @@ int CRtmpChunk::nParseChunkBody(CBufferReader& buffer)
 		目标地址：playload起始地址 + 已接收长度
 		源地址是当前接收缓冲区的可读位置
 	*/
-	memcpy(rtmpMsg.playload.get() + rtmpMsg.nIndex, pBuf + nBytesUsed, nChunkSize);
+	memcpy(rtmpMsg.pPlayload.get() + rtmpMsg.nIndex, pBuf + nBytesUsed, nChunkSize);
 	nBytesUsed += nChunkSize;
 	rtmpMsg.nIndex += nChunkSize;
 	

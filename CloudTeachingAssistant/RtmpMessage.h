@@ -23,7 +23,7 @@ struct RtmpMessage
 
 	uint8_t nCsId = 0;			//chunk stream id
 	uint32_t nIndex = 0;		//消息解析的位置索引
-	std::shared_ptr<char> playload = nullptr;
+	std::shared_ptr<char> pPlayload = nullptr;
 
 	void Clear()
 	{
@@ -32,13 +32,13 @@ struct RtmpMessage
 		nExtendTimestamp = 0;
 		if (nLength > 0)
 		{
-			playload.reset(new char[nLength], std::default_delete<char[]>());
+			pPlayload.reset(new char[nLength], std::default_delete<char[]>());
 		}
 	}
 
-	bool IsCompleted() const
+	bool bIsCompleted() const
 	{
-		if (nIndex == nLength && nLength > 0 && playload != nullptr)
+		if (nIndex == nLength && nLength > 0 && pPlayload != nullptr)
 		{
 			return true;
 		}
