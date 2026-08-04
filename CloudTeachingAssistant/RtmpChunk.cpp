@@ -149,7 +149,7 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 			return -2;
 		}
 
-		nCsId += pBuf[nBytesUsed] + 64;
+		nCsId += (uint8_t)(pBuf[nBytesUsed] + 64);
 		nBytesUsed += 1;
 	}
 	//低6位为1表示Basic Header总长度为3字节。真正的csid应该是：
@@ -162,7 +162,7 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 			return -3;
 		}
 
-		nCsId = pBuf[nBytesUsed + 1] * 256 + pBuf[nBytesUsed] + 64;
+		nCsId = (uint8_t)(pBuf[nBytesUsed + 1] * 256 + pBuf[nBytesUsed] + 64);
 		nBytesUsed += 2;
 	}
 
@@ -316,18 +316,18 @@ int CRtmpChunk::nCreateBasicHeader(uint8_t nFmt, uint32_t nCsId, char* pBuf)
 
 	if (nCsId > 64 + 255)//basic头占3个字节
 	{
-		pBuf[nLen++] = (nFmt << 6) | 1;
-		pBuf[nLen++] = (nCsId - 64) & 0xff;
-		pBuf[nLen++] = ((nCsId - 64) >> 8) & 0xff;
+		pBuf[nLen++] = (char)((nFmt << 6) | 1);
+		pBuf[nLen++] = (char)((nCsId - 64) & 0xff);
+		pBuf[nLen++] = (char)(((nCsId - 64) >> 8) & 0xff);
 	}
 	else if (nCsId >= 64)//2字节
 	{
-		pBuf[nLen++] = (nFmt << 6) | 0;
-		pBuf[nLen++] = (nCsId - 64) & 0xff;
+		pBuf[nLen++] = (char)((nFmt << 6) | 0);
+		pBuf[nLen++] = (char)((nCsId - 64) & 0xff);
 	}
 	else//1字节
 	{
-		pBuf[nLen++] = (nFmt << 6) | nCsId;
+		pBuf[nLen++] = (char)((nFmt << 6) | nCsId);
 	}
 
 	return nLen;
