@@ -2,7 +2,7 @@
 #include <memory>
 #include <mutex>
 #include "RtmpSink.h"
-#include "amf.h"
+#include "Amf.h"
 #include "Rtmp.h"
 
 class CRtmpSink;
