@@ -19,7 +19,7 @@ int CRtmpChunk::nParse(CBufferReader& inBuffer, RtmpMessage& outRtmpMsg)
 	if (!inBuffer.nReadableBytes())
 	{
 		std::cout << "no data readable" << std::endl;
-		return -1;
+		return 0;
 	}
 
 	if (m_state == PARSE_HEADER)
