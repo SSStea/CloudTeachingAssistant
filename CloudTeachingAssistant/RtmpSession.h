@@ -6,7 +6,7 @@
 #include "Rtmp.h"
 
 class CRtmpSink;
-class RtmpConnection;
+class CRtmpConnection;
 class CRtmpSession
 {
 public:
@@ -38,7 +38,7 @@ public:
 	//发送数据
 	void SendMediaData(uint8_t nType, uint64_t nTimeStamp, std::shared_ptr<char> pData, uint32_t nSize);
 	//获取推流对象
-	std::shared_ptr<RtmpConnection> pGetPublisher();
+	std::shared_ptr<CRtmpConnection> pGetPublisher();
 private:
 	std::mutex m_mutex;
 	bool m_bHasPublisher = false;

@@ -1,4 +1,5 @@
 #include "RtmpSession.h"
+#include "RtmpConnection.h"
 
 CRtmpSession::CRtmpSession()
 {
@@ -61,12 +62,12 @@ void CRtmpSession::SendMetaData(mapAmfObjects& metaData)
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 
-	for (auto it : m_mapRtmpSinks)
+	for (auto it = m_mapRtmpSinks.begin(); it != m_mapRtmpSinks.end();)
 	{
-		auto conn = it.second.lock();
+		auto conn = it->second.lock();
 		if (!conn)
 		{
-			m_mapRtmpSinks.erase(conn->nGetId());
+			m_mapRtmpSinks.erase(it++);
 		}
 		else
 		{
@@ -74,6 +75,7 @@ void CRtmpSession::SendMetaData(mapAmfObjects& metaData)
 			{
 				conn->bSendMetaData(metaData);
 			}
+			it++;
 		}
 	}
 }
@@ -82,12 +84,12 @@ void CRtmpSession::SendMediaData(uint8_t nType, uint64_t nTimeStamp, std::shared
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 
-	for (auto it : m_mapRtmpSinks)
+	for (auto it = m_mapRtmpSinks.begin(); it != m_mapRtmpSinks.end();)
 	{
-		auto conn = it.second.lock();
+		auto conn = it->second.lock();
 		if (!conn)
 		{
-			m_mapRtmpSinks.erase(conn->nGetId());
+			m_mapRtmpSinks.erase(it++);
 		}
 		else//在线用户，观看中：发送音视频，刚进直播间：先发送元数据再发送音视频
 		{
@@ -103,11 +105,19 @@ void CRtmpSession::SendMediaData(uint8_t nType, uint64_t nTimeStamp, std::shared
 				//已经观看中
 				conn->bSendMediaData(nType, nTimeStamp, pData, nSize);
 			}
+			it++;
 		}
 	}
 }
 
-std::shared_ptr<RtmpConnection> CRtmpSession::pGetPublisher()
+std::shared_ptr<CRtmpConnection> CRtmpSession::pGetPublisher()
 {
-	return std::shared_ptr<RtmpConnection>();
+	std::lock_guard<std::mutex> lock(m_mutex);
+	auto publisher = m_pPublisher.lock();
+	if (publisher)
+	{
+		return std::dynamic_pointer_cast<CRtmpConnection>(publisher);
+	}
+
+	return nullptr;
 }
