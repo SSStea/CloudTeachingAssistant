@@ -5,7 +5,11 @@
 #include "RtmpChunk.h"
 #include "RtmpHandshake.h"
 #include "Rtmp.h"
+#include "RtmpServer.h"
+#include "RtmpSession.h"
 
+class CRtmpServer;
+class CRtmpSession;
 class CRtmpConnection : public CTcpConnection, public CRtmpSink
 {
 public:
@@ -19,9 +23,8 @@ public:
 		START_PUBLISH,
 	};
 
-	CRtmpConnection(CReactorBase* reactor, int nSocket);
+	CRtmpConnection(std::shared_ptr<CRtmpServer> rtmpServer, CReactorBase* reactor, int nSocket);
 	virtual ~CRtmpConnection();
-
 
 	virtual bool bIsPlayer() override { return m_state == START_PLAY; }
 	virtual bool bIsPublisher() override { return m_state == START_PUBLISH; }
@@ -31,6 +34,7 @@ public:
 	virtual uint32_t nGetId() override { return this->nGetSocket(); }
 
 private:
+	CRtmpConnection(CReactorBase* reactor, int nSocket, CRtmp* rtmp);
 	bool bOnRead(CBufferReader& buffer);//读数据
 	void OnClose();
 
@@ -83,5 +87,11 @@ private:
 	uint32_t m_nAvcSequenceHeaderSize = 0;
 	uint32_t m_nAacSequenceHeaderSize = 0;
 
+	std::string m_strAppName;
+	std::string m_strStreamName;
+	std::string m_strStreamPath;
+
+	std::weak_ptr<CRtmpServer> m_pRtmpServer;
+	std::weak_ptr<CRtmpSession> m_pRtmpSession;
 };
 

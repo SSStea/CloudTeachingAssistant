@@ -1,9 +1,16 @@
 #include "RtmpConnection.h"
 
-CRtmpConnection::CRtmpConnection(CReactorBase* reactor, int nSocket)
+CRtmpConnection::CRtmpConnection(CReactorBase* reactor, int nSocket, CRtmp* rtmp)
 	: CTcpConnection(reactor, nSocket), m_state(HANDSHAKE),
 	m_pRtmpChunk(new CRtmpChunk())
 {
+	m_nPeerWidth = rtmp->nGetPeerBandwidth();
+	m_nAcknowledgementSize = rtmp->nGetAcknowledgementSize();
+	m_nMaxChunkSize = rtmp->nGetChunkSize();
+	m_strStreamPath = rtmp->strGetStreamPath();
+	m_strStreamName = rtmp->strGetStreamName();
+	m_strAppName = rtmp->strGetApp();
+
 	//设置回调函数，处理读数据
 	this->setReadCallback([this](std::shared_ptr<CTcpConnection> conn, CBufferReader& buffer)
 		{
@@ -16,6 +23,13 @@ CRtmpConnection::CRtmpConnection(CReactorBase* reactor, int nSocket)
 			this->OnClose();
 		});
 
+}
+
+CRtmpConnection::CRtmpConnection(std::shared_ptr<CRtmpServer> rtmpServer, CReactorBase* reactor, int nSocket)
+	: CRtmpConnection(reactor, nSocket, rtmpServer.get())
+{
+	m_pHandShake.reset(new CRtmpHandshake(CRtmpHandshake::HANDSHAKE_C0C1));
+	m_pRtmpServer = rtmpServer;
 }
 
 CRtmpConnection::~CRtmpConnection()

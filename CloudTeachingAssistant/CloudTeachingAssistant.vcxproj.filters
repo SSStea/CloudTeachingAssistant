@@ -13,7 +13,7 @@
     <ClCompile Include="EventLoop.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp"/>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="ReactorBase.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
@@ -45,6 +45,9 @@
       <Filter>RtmpServer</Filter>
     </ClCompile>
     <ClCompile Include="RtmpSession.cpp">
+      <Filter>RtmpServer</Filter>
+    </ClCompile>
+    <ClCompile Include="RtmpServer.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,6 +107,9 @@
       <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="RtmpSession.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="RtmpServer.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
   </ItemGroup>
