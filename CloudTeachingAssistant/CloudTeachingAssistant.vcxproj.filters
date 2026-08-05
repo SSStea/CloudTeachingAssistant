@@ -78,6 +78,9 @@
     <ClInclude Include="Timer.h">
       <Filter>EdoyunNet</Filter>
     </ClInclude>
+    <ClInclude Include="RtmpSink.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
     <ClInclude Include="Amf.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
