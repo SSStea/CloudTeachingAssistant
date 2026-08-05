@@ -35,7 +35,6 @@ int CAmfDecoder::nDecode(const char* pData, int nSize, int n)
 
 		case AMF0_ECMA_ARRAY:
 			nRet = nDecodeObject(pData + nBytesUsed + 4, nSize - nBytesUsed - 4, m_objs);
-			break;
 
 		default:
 			break;
@@ -43,8 +42,7 @@ int CAmfDecoder::nDecode(const char* pData, int nSize, int n)
 
 		if (nRet < 0)
 		{
-			std::cout << "decode fail" << std::endl;
-			return -1;
+			break;
 		}
 		nBytesUsed += nRet;
 		n--;
@@ -112,7 +110,7 @@ int CAmfDecoder::nDecodeString(const char* pData, int nSize, std::string& strAmf
 	//获取string
 	if (nStrLen > (nSize - nByteUsed))
 	{
-		std::cout << "data is not complete" << std::endl;
+		std::cout << "string data is not complete" << std::endl;
 		return -2;
 	}
 	strAmfString = std::string(&pData[nByteUsed], 0, nStrLen);
@@ -132,24 +130,23 @@ int CAmfDecoder::nDecodeObject(const char* pData, int nSize, mapAmfObjects& mapA
 		nSize -= 2;
 		if (nSize < nStrLen)
 		{
-			std::cout << "data is not complete" << std::endl;
+			std::cout << "obj data is not complete" << std::endl;
 			return nBytesUsed;
 		}
-		nBytesUsed += 2;
 
 		//获取键、值
-		std::string strKey(pData + nBytesUsed, 0, nStrLen);
+		std::string strKey(pData + nBytesUsed + 2, 0, nStrLen);
 		nSize -= nStrLen;
 
 		CAmfDecoder dec;
 		//每次解码一个对象，返回值为本次解码消耗了多少字节数
-		int nRet = dec.nDecode(pData + nBytesUsed + nStrLen, nSize, 1);
+		int nRet = dec.nDecode(pData + nBytesUsed + 2 + nStrLen, nSize, 1);
+		nBytesUsed += 2 + nStrLen + nRet;
 		if (nRet <= 1)
 		{
 			std::cout << "decode fail" << std::endl;
 			break;
 		}
-		nBytesUsed += nStrLen + nRet;
 
 		mapAmfObjs.emplace(strKey, dec.GetObject());
 	}
