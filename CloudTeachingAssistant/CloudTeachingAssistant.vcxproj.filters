@@ -13,9 +13,7 @@
     <ClCompile Include="EventLoop.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>EdoyunNet</Filter>
-    </ClCompile>
+    <ClCompile Include="main.cpp"/>
     <ClCompile Include="ReactorBase.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
