@@ -96,6 +96,7 @@
     <ClInclude Include="ReactorEpoll.h" />
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />
+    <ClInclude Include="RtmpMessage.h" />
     <ClInclude Include="RtmptHandshake.h" />
     <ClInclude Include="TcpConnection.h" />
     <ClInclude Include="TcpServer.h" />

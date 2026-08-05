@@ -75,6 +75,9 @@
     <ClInclude Include="RtmptHandshake.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
+    <ClInclude Include="RtmpMessage.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EdoyunNet">
