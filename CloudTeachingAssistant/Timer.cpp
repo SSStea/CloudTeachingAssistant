@@ -54,22 +54,25 @@ void CTimerQueue::HandleTimerEvent()
 			m_mapEvents.begin()->first.first <= nTimePoint)
 			//要处理的这个任务的超时时间不能超过当前时间
 		{
-			TimerId timerId = m_mapEvents.begin()->first.second;
-			//获取这个事件是一次性还是反复执行
-			bool bFlag = m_mapEvents.begin()->second->eventCallback();
-			if (bFlag)
+			if(m_mapEvents.begin()->first.second)
 			{
-				m_mapEvents.begin()->second->SetNextTimeout(nTimePoint);
-				//直接把这个事件移动过来，因为事件是智能指针，避免复制带来的指针加减一
-				auto timerPtr = std::move(m_mapEvents.begin()->second);
+				TimerId timerId = m_mapEvents.begin()->first.second;
+				//获取这个事件是一次性还是反复执行
+				bool bFlag = m_mapEvents.begin()->second->eventCallback();
+				if (bFlag)
+				{
+					m_mapEvents.begin()->second->SetNextTimeout(nTimePoint);
+					//直接把这个事件移动过来，因为事件是智能指针，避免复制带来的指针加减一
+					auto timerPtr = std::move(m_mapEvents.begin()->second);
 
-				m_mapEvents.erase(m_mapEvents.begin());
-				m_mapEvents.emplace(std::pair<int64_t, TimerId>(timerPtr->getNextTimeout(), timerId), timerPtr);
-			}
-			else
-			{
-				m_mapEvents.erase(m_mapEvents.begin());
-				m_mapTimers.erase(timerId);
+					m_mapEvents.erase(m_mapEvents.begin());
+					m_mapEvents.emplace(std::pair<int64_t, TimerId>(timerPtr->getNextTimeout(), timerId), timerPtr);
+				}
+				else
+				{
+					m_mapEvents.erase(m_mapEvents.begin());
+					m_mapTimers.erase(timerId);
+				}
 			}
 		}
 	}
