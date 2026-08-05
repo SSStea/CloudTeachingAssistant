@@ -34,6 +34,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>EdoyunNet</Filter>
     </ClCompile>
+    <ClCompile Include="Amf.cpp">
+      <Filter>RtmpServer</Filter>
+    </ClCompile>
     <ClCompile Include="RtmpChunk.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>EdoyunNet</Filter>
+    </ClInclude>
+    <ClInclude Include="Amf.h">
+      <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="RtmpChunk.h">
       <Filter>RtmpServer</Filter>
