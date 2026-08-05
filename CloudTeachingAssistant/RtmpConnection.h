@@ -54,14 +54,16 @@ private:
 	void SendAcknowlegement();//发送接收大小
 	void SetChunkSize();//设置块大小
 
-	//发送启动消息
+	//发送调用消息
 	bool bSendInvokeMessage(uint32_t nCsId, std::shared_ptr<char> pPayload, uint32_t nPayloadSize);
 	//发送通知消息
 	bool bSendNotifyMessage(uint32_t nCsId, std::shared_ptr<char> pPayload, uint32_t nPayloadSize);
 	void SendRtmpChunks(uint32_t nCsId, RtmpMessage& rtmpMsg);//发送块数据
 
 	virtual bool bSendMetaData(mapAmfObjects metaData) override;
-	virtual bool bSendMediaData(uint8_t nType, uint64_t nTimeStamp, std::shared_ptr<char> pPlayload, uint32_t nPlayloadSize)override;
+	virtual bool bSendMediaData(uint8_t nType, uint64_t nTimeStamp, std::shared_ptr<char> pPlayload, uint32_t nPlayloadSize) override;
+
+	bool bIsKeyFrame(std::shared_ptr<char> pData, uint32_t nSize);
 
 private:
 	ConnectionState m_state;
@@ -72,9 +74,9 @@ private:
 	uint32_t m_nPeerWidth;
 	uint32_t m_nAcknowledgementSize;
 	uint32_t m_nMaxChunkSize;
-	uint32_t m_nStreamID;
+	uint32_t m_nStreamID = 0;
 
-	mapAmfObjects m_amfobjMetaData;
+	mapAmfObjects m_amfobjsMetaData;
 	CAmfDecoder m_amfDecoder;
 	CAmfEncoder m_amfEncoder;
 
@@ -90,6 +92,8 @@ private:
 	std::string m_strAppName;
 	std::string m_strStreamName;
 	std::string m_strStreamPath;
+
+	bool m_bHasKeyFrame = false;
 
 	std::weak_ptr<CRtmpServer> m_pRtmpServer;
 	std::weak_ptr<CRtmpSession> m_pRtmpSession;
