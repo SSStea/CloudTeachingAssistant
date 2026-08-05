@@ -20,7 +20,7 @@ public:
 
 	int nParse(CBufferReader& inBuffer, char* pResBuf, uint32_t nResBufSize);
 
-	bool bIsCompleted() const
+	bool bHandshakeIsCompleted() const
 	{
 		return m_handshakeState == HANDSHAKE_COMPLETE;
 	}

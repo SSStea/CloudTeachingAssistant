@@ -1,4 +1,4 @@
-#include "RtmptHandshake.h"
+#include "RtmpHandshake.h"
 
 CRtmpHandshake::CRtmpHandshake(State state)
 {
