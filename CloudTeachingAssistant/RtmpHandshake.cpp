@@ -35,7 +35,7 @@ int CRtmpHandshake::nParse(CBufferReader& inBuffer, char* pResBuf, uint32_t nRes
 		nResSize = 1536; //返回的需要发送的数据（C2）大小
 
 		//准备C2
-		memcpy(pResBuf, buf + 1, 1546); //将S1回传
+		memcpy(pResBuf, buf + 1, 1536); //将S1回传
 		m_handshakeState = HANDSHAKE_COMPLETE;
 	}
 	else if (m_handshakeState == HANDSHAKE_C0C1)//由服务端处理
@@ -45,29 +45,31 @@ int CRtmpHandshake::nParse(CBufferReader& inBuffer, char* pResBuf, uint32_t nRes
 			std::cout << "receive [C0 C1] is not complete" << std::endl;
 			return nResSize;
 		}
-
-		if (buf[0] != 3)
+		else
 		{
-			std::cout << "version is not 3, error" << std::endl;
-			return -1;
+			if (buf[0] != 3)
+			{
+				std::cout << "version is not 3, error" << std::endl;
+				return -1;
+			}
+
+			nPos += 1537;
+			nResSize = 1 + 1536 + 1536;
+
+			memset(pResBuf, 0, nResSize); //返回S0 S1 S2
+			pResBuf[0] = 3; // S1
+
+			char* p = pResBuf;
+			p += 9;
+			for (int i = 0; i < 1528; i++)
+			{
+				*p++ = (char)rd();
+			}//S1的随机数
+
+			memcpy(p, buf + 1, 1536);//把C1拷贝进S2
+
+			m_handshakeState = HANDSHAKE_C2;
 		}
-
-		nPos += 1537;
-		nResSize = 1 + 1536 + 1536;
-
-		memset(pResBuf, 0, nResSize); //返回S0 S1 S2
-		pResBuf[0] = 3; // S1
-
-		char* p = pResBuf;
-		p += 9;
-		for (int i = 0; i < 1528; i++)
-		{
-			*p++ = (char)rd();
-		}//S1的随机数
-
-		memcpy(p, buf + 1, 1536);//把C1拷贝进S2
-
-		m_handshakeState = HANDSHAKE_C2;
 	}
 	else if(m_handshakeState == HANDSHAKE_C2)//服务器处理C2
 	{
@@ -75,12 +77,6 @@ int CRtmpHandshake::nParse(CBufferReader& inBuffer, char* pResBuf, uint32_t nRes
 		{
 			std::cout << "receive [C2] is not complete" << std::endl;
 			return nResSize;
-		}
-
-		if (buf[0] != 3)
-		{
-			std::cout << "version is not 3, error" << std::endl;
-			return -1;
 		}
 
 		nPos += 1536;

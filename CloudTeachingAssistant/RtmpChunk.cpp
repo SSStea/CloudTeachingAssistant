@@ -145,8 +145,8 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 	{
 		if (nBufSize < (nBytesUsed + 1))
 		{
-			std::cout << "chunk stream id is not complete" << std::endl;
-			return -2;
+			//std::cout << "chunk stream id is not complete" << std::endl;
+			return 0;
 		}
 
 		nCsId += (uint8_t)(pBuf[nBytesUsed] + 64);
@@ -158,8 +158,8 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 	{
 		if (nBufSize < (nBytesUsed + 2))
 		{
-			std::cout << "chunk stream id is not complete" << std::endl;
-			return -3;
+			//std::cout << "chunk stream id is not complete" << std::endl;
+			return 0;
 		}
 
 		nCsId = (uint8_t)(pBuf[nBytesUsed + 1] * 256 + pBuf[nBytesUsed] + 64);
@@ -170,8 +170,8 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 	//检查缓冲区中是否有完整Message Header
 	if (nBufSize < (nHeaderLen + nBytesUsed))
 	{
-		std::cout << "data is not complete" << std::endl;
-		return -4;
+		//std::cout << "nParseChunkHeader 173 data is not complete" << std::endl;
+		return 0;
 	}
 
 	/*创建临时Header对象：
@@ -221,8 +221,8 @@ int CRtmpChunk::nParseChunkHeader(CBufferReader& buffer)
 	{
 		if (nBufSize < (nBytesUsed + 4))
 		{
-			std::cout << "data is not complete" << std::endl;
-			return -5;
+			//std::cout << "nParseChunkHeader 224 data is not complete" << std::endl;
+			return 0;
 		}
 
 		//按大端方式读取4字节扩展时间戳
@@ -283,8 +283,8 @@ int CRtmpChunk::nParseChunkBody(CBufferReader& buffer)
 	}
 	if (nBufSize < (nChunkSize + nBytesUsed))
 	{
-		std::cout << "data is not complete" << std::endl;
-		return -2;
+		//std::cout << "nParseChunkBody data is not complete" << std::endl;
+		return 0;
 	}
 	if (rtmpMsg.nIndex + nChunkSize > rtmpMsg.nLength)
 	{

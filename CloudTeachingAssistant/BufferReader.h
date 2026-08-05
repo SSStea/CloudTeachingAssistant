@@ -50,6 +50,6 @@ private:
 	uint32_t m_nReadIndex = 0;
 	uint32_t m_nWriteIndex = 0;
 	static const uint32_t MAX_BYTES_PER_READ = 4096;
-	static const uint32_t MAX_BUFFER_SIZE = 100 * 1024;
+	static const uint32_t MAX_BUFFER_SIZE = 1000000 * 1024;
 };
 
