@@ -54,6 +54,7 @@ private:
 	disConnectCallback m_disConnectCb;
 	closeCallback m_closeCb;
 	readCallback m_readCb;
+	std::mutex m_mutex;
 
 	void Close();
 };

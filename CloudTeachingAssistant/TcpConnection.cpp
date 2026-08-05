@@ -7,11 +7,13 @@ CTcpConnection::CTcpConnection(CReactorBase* reactor, int nSockFd)
 {
 	m_bIsClosed = false;
 
+	/*TCP test：
 	m_reactor->AddTimer([this]() {
 		char buffer[] = "hello i am server";
 		this->Send(buffer, sizeof(buffer));
 		return true; 
 		}, 1000);
+	*/
 
 	m_ptrChannel->SetReadCallback([this]() {this->HandleRead(); });
 	m_ptrChannel->SetWriteCallback([this]() {this->HandleWrite(); });
@@ -43,7 +45,9 @@ void CTcpConnection::Send(std::shared_ptr<char> data, uint32_t nSize)
 {
 	if (!m_bIsClosed)
 	{
+		m_mutex.lock();
 		m_writeBuf->bAppend(data, nSize);
+		m_mutex.unlock();
 		this->HandleWrite();
 	}
 
@@ -53,29 +57,37 @@ void CTcpConnection::Send(const char* data, uint32_t nSize)
 {
 	if (!m_bIsClosed)
 	{
+		m_mutex.lock();
 		m_writeBuf->bAppend(data, nSize);
+		m_mutex.unlock();
 		this->HandleWrite();
 	}
 }
 
 void CTcpConnection::disConnect()
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
+
 	this->Close();
 }
 
 void CTcpConnection::HandleRead()
 {
-	if (m_bIsClosed)
 	{
-		return;
-	}
+		std::lock_guard<std::mutex> lock(m_mutex);
 
-	//从套接字中读数据
-	int nReadLen = m_readBuf->nReadFromSocket(m_ptrChannel->GetSocket());
-	if (nReadLen < 0)
-	{
-		this->Close();
-		return;
+		if (m_bIsClosed)
+		{
+			return;
+		}
+
+		//从套接字中读数据
+		int nReadLen = m_readBuf->nReadFromSocket(m_ptrChannel->GetSocket());
+		if (nReadLen < 0)
+		{
+			this->Close();
+			return;
+		}
 	}
 
 	//如果套接字中读到了数据，并且有读缓存的回调函数
@@ -85,16 +97,19 @@ void CTcpConnection::HandleRead()
 		bool bRet = m_readCb(shared_from_this(), *m_readBuf);
 		if (!bRet)
 		{
+			std::lock_guard<std::mutex> lock(m_mutex);
 			this->Close();
 		}
 	}
 
+	/*echo test：
 	std::string strData;
 	uint32_t nSize = m_readBuf->nReadFromBuffer(strData);
 	if (nSize > 0)
 	{
 		this->Send(strData.c_str(), nSize);
 	}
+	*/
 }
 
 void CTcpConnection::HandleWrite()
@@ -104,6 +119,10 @@ void CTcpConnection::HandleWrite()
 		return;
 	}
 
+	if (!m_mutex.try_lock())
+	{
+		return;
+	}
 	int nWriteLen = 0;
 	bool bEmpty = false;
 
@@ -113,6 +132,7 @@ void CTcpConnection::HandleWrite()
 		if (nWriteLen < 0)
 		{
 			this->Close();
+			m_mutex.unlock();
 			return;
 		}
 
@@ -132,15 +152,18 @@ void CTcpConnection::HandleWrite()
 		m_ptrChannel->EnableWriting();//设为关心写事件，因为还没发送完，还得继续
 		m_reactor->UpdateChannel(m_ptrChannel);//更新reactor的通道
 	}
+	m_mutex.unlock();
 }
 
 void CTcpConnection::HandleClose()
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
 	this->Close();
 }
 
 void CTcpConnection::HandleError()
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
 	this->Close();
 }
 
