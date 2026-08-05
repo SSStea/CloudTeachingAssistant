@@ -43,6 +43,9 @@
     <ClCompile Include="RtmptHandshake.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
+    <ClCompile Include="RtmpSession.cpp">
+      <Filter>RtmpServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -94,6 +97,9 @@
       <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="RtmpMessage.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="RtmpSession.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
   </ItemGroup>
