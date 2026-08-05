@@ -84,6 +84,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReactorBase.cpp" />
     <ClCompile Include="RtmpChunk.cpp" />
+    <ClCompile Include="RtmpConnection.cpp" />
     <ClCompile Include="RtmpSession.cpp" />
     <ClCompile Include="RtmpHandshake.cpp" />
     <ClCompile Include="TcpConnection.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="ReactorBase.h" />
     <ClInclude Include="Rtmp.h" />
     <ClInclude Include="RtmpChunk.h" />
+    <ClInclude Include="RtmpConnection.h" />
     <ClInclude Include="RtmpMessage.h" />
     <ClInclude Include="RtmpSession.h" />
     <ClInclude Include="RtmpSink.h" />

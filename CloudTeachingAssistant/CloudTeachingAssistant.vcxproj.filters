@@ -40,6 +40,9 @@
     <ClCompile Include="RtmpChunk.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
+    <ClCompile Include="RtmpConnection.cpp">
+      <Filter>RtmpServer</Filter>
+    </ClCompile>
     <ClCompile Include="RtmpHandshake.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
@@ -91,6 +94,9 @@
       <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="RtmpChunk.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
+    <ClInclude Include="RtmpConnection.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="RtmpHandshake.h">
