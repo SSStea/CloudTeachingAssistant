@@ -99,6 +99,7 @@
     <ClInclude Include="ReactorEpoll.h" />
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />
+    <ClInclude Include="Rtmp.h" />
     <ClInclude Include="RtmpChunk.h" />
     <ClInclude Include="RtmpMessage.h" />
     <ClInclude Include="RtmptHandshake.h" />

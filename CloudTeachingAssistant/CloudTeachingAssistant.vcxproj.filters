@@ -81,6 +81,9 @@
     <ClInclude Include="Amf.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
+    <ClInclude Include="Rtmp.h">
+      <Filter>RtmpServer</Filter>
+    </ClInclude>
     <ClInclude Include="RtmpChunk.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
