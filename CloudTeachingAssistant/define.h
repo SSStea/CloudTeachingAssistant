@@ -18,7 +18,7 @@ enum Cmd : uint16_t
 };
 
 //应答
-enum ResultCode : uint16_t
+enum ResultCode
 {
 	SUCCESSFUL,			//成功
 	ERROR,				//错误
@@ -176,7 +176,7 @@ struct PlayStreamBody : public PacketHead
 {
 	PlayStreamBody()
 	{
-		nCmd = CREATESTREAM;
+		nCmd = PLAYSTREAM;
 		nLen = sizeof(PlayStreamBody);
 		result = ERROR;
 		arrStreamAddress.fill('\0');

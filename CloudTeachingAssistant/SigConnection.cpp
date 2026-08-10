@@ -92,7 +92,7 @@ std::string CSigConnection::strGetStreamAddr() const
 
 bool CSigConnection::bOnRead(CBufferReader& buffer)
 {
-	if (buffer.nReadableBytes() > 0)
+	while (buffer.nReadableBytes() > 0)
 	{
 		HanldeMessage(buffer);
 	}
@@ -277,6 +277,7 @@ void CSigConnection::DoObtainStream(const PacketHead* data)
 			m_conn = tcpConn;//我们就可以通过这个目标(被控端)连接器来转发消息
 			//通知被控端来创建流
 			conn->Send((const char*)&creatBody, creatBody.nLen);
+			this->Send((const char*)&replyBody, replyBody.nLen);
 			break;
 
 		case NONE:
@@ -307,7 +308,7 @@ void CSigConnection::DoObtainStream(const PacketHead* data)
 			else//在推流，而且流地址正常
 			{
 				std::cout << "target is pushing, stream address ok" << std::endl;
-				this->m_state = PUSHER;
+				this->m_state = PULLER;
 				this->AddClient(strCode);
 				conn->AddClient(m_strCode);
 				//在推流 流已经存在，就不需要重新创建流，我们只需要播放流；
@@ -332,6 +333,10 @@ void CSigConnection::DoObtainStream(const PacketHead* data)
 void CSigConnection::DoCreateStream(const PacketHead* data)
 {
 	PlayStreamBody body;
+	CreateStreamReplyBody* reply =
+		(CreateStreamReplyBody*)data;
+
+	m_strStreamAddr = reply->strGetStreamAddr();
 	//判断所有连接的状态，如果连接器状态是空闲，我们就去回应
 	for (auto idefy : m_vecObjectes)
 	{
@@ -346,7 +351,7 @@ void CSigConnection::DoCreateStream(const PacketHead* data)
 		{
 			conn->m_state = IDLE;
 			body.SetCode(ERROR);
-			this->Send((const char*)&body, body.nLen);
+			conn->Send((const char*)&body, body.nLen);
 			continue;
 		}
 
@@ -362,7 +367,7 @@ void CSigConnection::DoCreateStream(const PacketHead* data)
 			break;
 
 		case PULLER:
-			this->m_state = PULLER;
+			this->m_state = PUSHER;
 			body.SetCode(SUCCESSFUL);
 			body.SetStreamAddr(m_strStreamAddr);
 			std::cout << "stream address: " << m_strStreamAddr.c_str() << std::endl;
