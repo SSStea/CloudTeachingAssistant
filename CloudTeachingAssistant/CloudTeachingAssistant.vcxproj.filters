@@ -112,6 +112,9 @@
     <ClInclude Include="RtmpServer.h">
       <Filter>RtmpServer</Filter>
     </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>SigServer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="EdoyunNet">
@@ -119,6 +122,9 @@
     </Filter>
     <Filter Include="RtmpServer">
       <UniqueIdentifier>{38022f2d-40d4-4148-b678-8d9013bd6ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SigServer">
+      <UniqueIdentifier>{585f2021-a406-499a-99db-bfeb3c9f7223}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
