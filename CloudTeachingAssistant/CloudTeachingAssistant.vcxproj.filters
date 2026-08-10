@@ -50,6 +50,9 @@
     <ClCompile Include="RtmpServer.cpp">
       <Filter>RtmpServer</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionManager.cpp">
+      <Filter>SigServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -113,6 +116,9 @@
       <Filter>RtmpServer</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
+      <Filter>SigServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionManager.h">
       <Filter>SigServer</Filter>
     </ClInclude>
   </ItemGroup>
