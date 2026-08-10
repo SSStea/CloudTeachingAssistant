@@ -90,6 +90,7 @@
     <ClCompile Include="RtmpSession.cpp" />
     <ClCompile Include="RtmpHandshake.cpp" />
     <ClCompile Include="SigConnection.cpp" />
+    <ClCompile Include="SigServer.cpp" />
     <ClCompile Include="TcpConnection.cpp" />
     <ClCompile Include="TcpServer.cpp" />
     <ClCompile Include="TcpSocket.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="RtmpSink.h" />
     <ClInclude Include="RtmpHandshake.h" />
     <ClInclude Include="SigConnection.h" />
+    <ClInclude Include="SigServer.h" />
     <ClInclude Include="TcpConnection.h" />
     <ClInclude Include="TcpServer.h" />
     <ClInclude Include="TcpSocket.h" />

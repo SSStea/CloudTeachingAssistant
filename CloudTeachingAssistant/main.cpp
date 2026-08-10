@@ -2,6 +2,7 @@
 #include "EventLoop.h"
 #include "TcpServer.h"
 #include "RtmpServer.h"
+#include "SigServer.h"
 
 void TcpTest()
 {
@@ -39,8 +40,24 @@ void RtmpSeverTest()
 	getchar();
 }
 
+void SigeServerTest()
+{
+	uint32_t nCnt = std::thread::hardware_concurrency();
+	CEventLoop eventLoop(nCnt);
+	auto sigServer = CSigServer::pCreate(&eventLoop);
+	if (sigServer->bStart("172.20.108.206", 6539))
+	{
+		std::cout << "sig server start success" << std::endl;
+	}
+	else
+	{
+		std::cout << "sig server start fail" << std::endl;
+	}
+	getchar();
+}
+
 int main()
 {
-	RtmpSeverTest();
+	SigeServerTest();
     return 0;
 }

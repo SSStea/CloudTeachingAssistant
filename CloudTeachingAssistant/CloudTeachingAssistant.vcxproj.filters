@@ -56,6 +56,9 @@
     <ClCompile Include="SigConnection.cpp">
       <Filter>SigServer</Filter>
     </ClCompile>
+    <ClCompile Include="SigServer.cpp">
+      <Filter>SigServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -125,6 +128,9 @@
       <Filter>SigServer</Filter>
     </ClInclude>
     <ClInclude Include="SigConnection.h">
+      <Filter>SigServer</Filter>
+    </ClInclude>
+    <ClInclude Include="SigServer.h">
       <Filter>SigServer</Filter>
     </ClInclude>
   </ItemGroup>
