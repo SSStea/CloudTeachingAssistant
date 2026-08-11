@@ -65,6 +65,9 @@
     <ClCompile Include="LoadBalanceServer.cpp">
       <Filter>LoadBalanceServer</Filter>
     </ClCompile>
+    <ClCompile Include="ORMManager.cpp">
+      <Filter>LoginServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -149,6 +152,9 @@
       <Filter>LoadBalanceServer</Filter>
     </ClInclude>
     <ClInclude Include="logindefine.h">
+      <Filter>LoginServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ORMManager.h">
       <Filter>LoginServer</Filter>
     </ClInclude>
   </ItemGroup>
