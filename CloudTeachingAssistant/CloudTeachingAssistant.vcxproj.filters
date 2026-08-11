@@ -124,9 +124,6 @@
     <ClInclude Include="define.h">
       <Filter>SigServer</Filter>
     </ClInclude>
-    <ClInclude Include="logindefine.h">
-      <Filter>LoginServer</Filter>
-    </ClInclude>
     <ClInclude Include="ConnectionManager.h">
       <Filter>SigServer</Filter>
     </ClInclude>
@@ -135,6 +132,12 @@
     </ClInclude>
     <ClInclude Include="SigServer.h">
       <Filter>SigServer</Filter>
+    </ClInclude>
+    <ClInclude Include="loaddefine.h">
+      <Filter>LoadBalanceServer</Filter>
+    </ClInclude>
+    <ClInclude Include="logindefine.h">
+      <Filter>LoginServer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +149,9 @@
     </Filter>
     <Filter Include="SigServer">
       <UniqueIdentifier>{585f2021-a406-499a-99db-bfeb3c9f7223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoadBalanceServer">
+      <UniqueIdentifier>{08a42c65-834b-49f5-8c97-8d46ab47ccfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="LoginServer">
       <UniqueIdentifier>{88230d83-4bca-4d52-acf3-768cb761e231}</UniqueIdentifier>
