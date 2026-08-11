@@ -104,6 +104,7 @@
     <ClInclude Include="ConnectionManager.h" />
     <ClInclude Include="Channel.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="logindefine.h" />
     <ClInclude Include="ReactorEpoll.h" />
     <ClInclude Include="EventLoop.h" />
     <ClInclude Include="ReactorBase.h" />

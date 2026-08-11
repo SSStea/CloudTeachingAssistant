@@ -124,6 +124,9 @@
     <ClInclude Include="define.h">
       <Filter>SigServer</Filter>
     </ClInclude>
+    <ClInclude Include="logindefine.h">
+      <Filter>LoginServer</Filter>
+    </ClInclude>
     <ClInclude Include="ConnectionManager.h">
       <Filter>SigServer</Filter>
     </ClInclude>
@@ -143,6 +146,9 @@
     </Filter>
     <Filter Include="SigServer">
       <UniqueIdentifier>{585f2021-a406-499a-99db-bfeb3c9f7223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoginServer">
+      <UniqueIdentifier>{88230d83-4bca-4d52-acf3-768cb761e231}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
