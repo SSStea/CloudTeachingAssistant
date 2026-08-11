@@ -8,7 +8,7 @@
 #pragma pack(push,1)
 enum Cmd : uint16_t
 {
-	Minotor,
+	Monitor,
 	ERROR,
 	Login,
 	Register,
@@ -172,7 +172,7 @@ struct MonitorBody : public PacketHead {
 	MonitorBody()
 		:PacketHead()
 	{
-		nCmd = Minotor;
+		nCmd = Monitor;
 		nLen = sizeof(MonitorBody);
 		arrIP.fill('\0');
 	}

@@ -80,6 +80,8 @@
     <ClCompile Include="BufferReader.cpp" />
     <ClCompile Include="BufferWriter.cpp" />
     <ClCompile Include="ConnectionManager.cpp" />
+    <ClCompile Include="LoadBalanceConnection.cpp" />
+    <ClCompile Include="LoadBalanceServer.cpp" />
     <ClCompile Include="ReactorEpoll.cpp" />
     <ClCompile Include="EventLoop.cpp" />
     <ClCompile Include="main.cpp" />
@@ -104,6 +106,8 @@
     <ClInclude Include="ConnectionManager.h" />
     <ClInclude Include="Channel.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="LoadBalanceConnection.h" />
+    <ClInclude Include="LoadBalanceServer.h" />
     <ClInclude Include="loaddefine.h" />
     <ClInclude Include="logindefine.h" />
     <ClInclude Include="ReactorEpoll.h" />

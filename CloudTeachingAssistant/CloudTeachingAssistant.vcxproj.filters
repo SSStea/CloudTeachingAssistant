@@ -59,6 +59,12 @@
     <ClCompile Include="SigServer.cpp">
       <Filter>SigServer</Filter>
     </ClCompile>
+    <ClCompile Include="LoadBalanceConnection.cpp">
+      <Filter>LoadBalanceServer</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadBalanceServer.cpp">
+      <Filter>LoadBalanceServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -134,6 +140,12 @@
       <Filter>SigServer</Filter>
     </ClInclude>
     <ClInclude Include="loaddefine.h">
+      <Filter>LoadBalanceServer</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadBalanceConnection.h">
+      <Filter>LoadBalanceServer</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadBalanceServer.h">
       <Filter>LoadBalanceServer</Filter>
     </ClInclude>
     <ClInclude Include="logindefine.h">
