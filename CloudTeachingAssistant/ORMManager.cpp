@@ -59,7 +59,7 @@ void CORMManager::insertClient(const char* pName, const char* pAcount, const cha
 	if (mysql_query(&m_mysql, cQuery))
 	{
 		//大于0失败
-		std::cout << "insert fail: %s" << mysql_error(&m_mysql) << std::endl;
+		std::cout << "insert fail: " << mysql_error(&m_mysql) << std::endl;
 		return;
 	}
 	else
