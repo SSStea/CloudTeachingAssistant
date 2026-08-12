@@ -68,6 +68,9 @@
     <ClCompile Include="ORMManager.cpp">
       <Filter>LoginServer</Filter>
     </ClCompile>
+    <ClCompile Include="TcpClient.cpp">
+      <Filter>LoginServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -155,6 +158,9 @@
       <Filter>LoginServer</Filter>
     </ClInclude>
     <ClInclude Include="ORMManager.h">
+      <Filter>LoginServer</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpClient.h">
       <Filter>LoginServer</Filter>
     </ClInclude>
   </ItemGroup>
