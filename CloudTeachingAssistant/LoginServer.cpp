@@ -12,7 +12,7 @@ CLoginServer::CLoginServer(CEventLoop* eventloop)
 		m_ID = m_pEventLoop->AddTimer([this]() {
 			m_pClient->GetMonitorInfo();
 			return true;
-			}, 50000);
+			}, 1000);
 	}
 }
 
