@@ -20,7 +20,7 @@ enum ResultCode
 	S_OK = 0,
 	SERVER_ERROR,
 	REQUEST_TIMEOUT,
-	ALREADY_REDISTERED,
+	ALREADY_REGISTERED,
 	USER_DISAPPEAR,
 	ALREADY_LOGIN,
 	VERFICATE_FAILED
@@ -157,7 +157,7 @@ struct UserDestory : public PacketHead
 		nCmd = Destory;
 		nLen = sizeof(UserDestory);
 	}
-	void SeCode(const std::string& str)
+	void SetCode(const std::string& str)
 	{
 		str.copy(arrCode.data(), arrCode.size(), 0);
 	}
