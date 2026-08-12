@@ -74,6 +74,9 @@
     <ClCompile Include="LoginConnection.cpp">
       <Filter>LoginServer</Filter>
     </ClCompile>
+    <ClCompile Include="LoginServer.cpp">
+      <Filter>LoginServer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Acceptor.h">
@@ -167,6 +170,9 @@
       <Filter>LoginServer</Filter>
     </ClInclude>
     <ClInclude Include="LoginConnection.h">
+      <Filter>LoginServer</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginServer.h">
       <Filter>LoginServer</Filter>
     </ClInclude>
   </ItemGroup>

@@ -83,6 +83,7 @@
     <ClCompile Include="LoadBalanceConnection.cpp" />
     <ClCompile Include="LoadBalanceServer.cpp" />
     <ClCompile Include="LoginConnection.cpp" />
+    <ClCompile Include="LoginServer.cpp" />
     <ClCompile Include="ORMManager.cpp" />
     <ClCompile Include="ReactorEpoll.cpp" />
     <ClCompile Include="EventLoop.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="loaddefine.h" />
     <ClInclude Include="LoginConnection.h" />
     <ClInclude Include="logindefine.h" />
+    <ClInclude Include="LoginServer.h" />
     <ClInclude Include="ORMManager.h" />
     <ClInclude Include="ReactorEpoll.h" />
     <ClInclude Include="EventLoop.h" />
