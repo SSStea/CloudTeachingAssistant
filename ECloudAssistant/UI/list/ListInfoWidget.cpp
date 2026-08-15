@@ -1,6 +1,7 @@
 #include "ListInfoWidget.h"
 #include <QVBoxLayout>
 #include "ListWidget.h"
+#include "StyleLoader.h"
 
 CListInfoWidget::CListInfoWidget(QWidget *parent)
     : QWidget{parent}
@@ -8,10 +9,13 @@ CListInfoWidget::CListInfoWidget(QWidget *parent)
     setWindowFlag(Qt::FramelessWindowHint);
     setAttribute(Qt::WA_StyledBackground);
     setFixedSize(300, 640);
-    setStyleSheet("background-color: #563149");
+    //setStyleSheet("background-color: #563149");
 
     m_userBtn = new QPushButton(this);
     m_listWgt = new CListWidget(this);
+
+    m_userBtn->setObjectName("user_Btn");
+    m_listWgt->setObjectName("listWidget");
 
     connect(m_listWgt, &CListWidget::itemClicked, this, &CListInfoWidget::HandleItemSelect);
 
@@ -57,11 +61,13 @@ CListInfoWidget::CListInfoWidget(QWidget *parent)
     //布局
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addSpacing(50);
-    layout->addWidget(m_userBtn);
+    layout->addWidget(m_userBtn, 0, Qt::AlignHCenter);
     layout->addSpacing(50);
-    layout->addWidget(m_listWgt);
+    layout->addWidget(m_listWgt, 1, Qt::AlignHCenter);
     layout->setContentsMargins(0,0,0,0);
     setLayout(layout);
+
+    CStyleLoader::GetInstance()->LoadStyle(":/UI/brown/main.css", this);
 }
 
 void CListInfoWidget::HandleItemSelect(int nIndex)

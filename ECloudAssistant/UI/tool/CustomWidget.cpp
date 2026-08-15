@@ -42,6 +42,9 @@ void CCustomWidget::Init()
     m_nameLbl->setFixedSize(150, 50);
     m_imageLbl->setFixedSize(40, 40);
 
+    m_nameLbl->setStyleSheet("background-color:transparent;border:none;");
+    m_imageLbl->setStyleSheet("background-color:transparent;border:none;");
+
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->addWidget(m_imageLbl);
     layout->addWidget(m_nameLbl);
