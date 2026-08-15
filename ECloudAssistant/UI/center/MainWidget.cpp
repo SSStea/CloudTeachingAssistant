@@ -1,4 +1,6 @@
 #include "MainWidget.h"
+#include "RemoteWidget.h"
+#include "LoginWidget.h"
 
 CMainWidget::CMainWidget(QWidget *parent)
     : QWidget{parent}
@@ -10,13 +12,13 @@ CMainWidget::CMainWidget(QWidget *parent)
     m_stackWgt = new QStackedWidget(this);
     m_stackWgt->setFixedSize(700, 610);
 
-    m_login = new QWidget(this);
+    m_login = new CLoginWidget(this);
     m_login->setFixedSize(700, 610);
-    m_login->setStyleSheet("background-color: #FFFFFF");
+    //m_login->setStyleSheet("background-color: #FFFFFF");
 
-    m_remoteWgt = new QWidget(this);
+    m_remoteWgt = new CRemoteWidget(this);
     m_remoteWgt->setFixedSize(700, 610);
-    m_remoteWgt->setStyleSheet("background-color: #344522");
+    //m_remoteWgt->setStyleSheet("background-color: #344522");
 
     m_deviceWgt = new QWidget(this);
     m_deviceWgt->setFixedSize(700, 610);
@@ -32,7 +34,7 @@ CMainWidget::CMainWidget(QWidget *parent)
     m_stackWgt->addWidget(m_settingWgt);
 
     //指定显示哪个窗口
-    m_stackWgt->setCurrentWidget(m_settingWgt);
+    m_stackWgt->setCurrentWidget(m_login);
 }
 
 void CMainWidget::SlotItemClicked(int nIndex)

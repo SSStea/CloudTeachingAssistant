@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QStackedWidget>
 
+class CLoginWidget;
+class CRemoteWidget;
+
 class CMainWidget : public QWidget
 {
     Q_OBJECT
@@ -15,8 +18,8 @@ public slots:
 
 private:
     QStackedWidget* m_stackWgt;
-    QWidget* m_login;
-    QWidget* m_remoteWgt;
+    CLoginWidget* m_login;
+    CRemoteWidget* m_remoteWgt;
     QWidget* m_deviceWgt;
     QWidget* m_settingWgt;
 };
