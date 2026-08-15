@@ -4,6 +4,7 @@ INCLUDEPATH += $$PWD/title \
                 $$PWD/tool
 
 HEADERS += \
+    $$PWD/center/LoginWidget.h \
     $$PWD/list/ListInfoWidget.h \
     $$PWD/center/MainWidget.h \
     $$PWD/title/TitleWidget.h \
@@ -12,6 +13,7 @@ HEADERS += \
     $$PWD/tool/StyleLoader.h
 
 SOURCES += \
+    $$PWD/center/LoginWidget.cpp \
     $$PWD/list/ListInfoWidget.cpp \
     $$PWD/center/MainWidget.cpp \
     $$PWD/title/TitleWidget.cpp \
