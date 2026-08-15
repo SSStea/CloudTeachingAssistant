@@ -11,7 +11,8 @@ HEADERS += \
     $$PWD/title/TitleWidget.h \
     $$PWD/tool/CustomWidget.h \
     $$PWD/tool/ListWidget.h \
-    $$PWD/tool/StyleLoader.h
+    $$PWD/tool/StyleLoader.h \
+    $$PWD/tool/define.h
 
 SOURCES += \
     $$PWD/center/LoginWidget.cpp \
