@@ -37,4 +37,24 @@ struct AVConfig
     AudioConfig audio;
 };
 
+
+class CEncodBase
+{
+public:
+    CEncodBase():m_bIsInitialzed(false),m_pCodec(nullptr),m_pCodecContext(nullptr){m_config = {};}
+    virtual ~CEncodBase(){if(m_pCodecContext)avcodec_free_context(&m_pCodecContext);}
+    CEncodBase(const CEncodBase&) = delete;
+    CEncodBase& operator=(const CEncodBase&) = delete;
+public:
+    virtual bool bOpen(AVConfig& config) = 0;
+    virtual void Close() = 0;
+    AVCodecContext* pGetAVCodecContext() const
+    {return m_pCodecContext;}
+protected:
+    bool m_bIsInitialzed = false;
+    AVConfig m_config;
+    AVCodec* m_pCodec;
+    AVCodecContext* m_pCodecContext = nullptr;
+};
+
 #endif // AVCOMMON_H
