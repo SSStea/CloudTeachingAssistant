@@ -1,4 +1,5 @@
 HEADERS += \
+    $$PWD/capture/AudioBuffer.h \
     $$PWD/capture/WASAPICapture.h
 
 SOURCES += \
