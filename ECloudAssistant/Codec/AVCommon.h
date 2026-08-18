@@ -4,6 +4,7 @@
 #include <QtGlobal>
 #include <QDebug>
 #include <memory>
+#include <mutex>
 extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
@@ -55,6 +56,25 @@ protected:
     AVConfig m_config;
     AVCodec* m_pCodec;
     AVCodecContext* m_pCodecContext = nullptr;
+};
+
+class CDecodBase
+{
+public:
+    CDecodBase():m_bIsInitialzed(false),m_nVideoIndex(-1),m_nAudioIndex(-1),m_pCodec(nullptr),m_pCodecCtx(nullptr){m_config = {};}
+    virtual ~CDecodBase(){if(m_pCodecCtx){avcodec_free_context(&m_pCodecCtx);};}
+    CDecodBase(const CDecodBase&) = delete;
+    CDecodBase& operator=(const CDecodBase&) = delete;
+    AVCodecContext* pGetAVCodecContext() const
+    {return m_pCodecCtx;}
+protected:
+    bool m_bIsInitialzed;
+    std::mutex m_mutex;
+    qint32 m_nVideoIndex;
+    qint32 m_nAudioIndex;
+    AVConfig m_config;
+    AVCodec* m_pCodec;
+    AVCodecContext* m_pCodecCtx;
 };
 
 #endif // AVCOMMON_H
