@@ -21,6 +21,7 @@ HEADERS += \
 
 #引入UI模块
 include($$PWD/UI/UI.pri)
+include($$PWD/Pusher/Pusher.pri)
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
