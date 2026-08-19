@@ -4,6 +4,7 @@ HEADERS += \
     $$PWD/BufferReader.h \
     $$PWD/BufferWriter.h \
     $$PWD/Channel.h \
+    $$PWD/EventLoop.h \
     $$PWD/ReactorBase.h \
     $$PWD/ReactorSelect.h \
     $$PWD/TcpSocket.h \
@@ -13,6 +14,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/BufferReader.cpp \
     $$PWD/BufferWriter.cpp \
+    $$PWD/EventLoop.cpp \
     $$PWD/ReactorBase.cpp \
     $$PWD/ReactorSelect.cpp \
     $$PWD/TcpSocket.cpp \
