@@ -13,6 +13,11 @@ enum Cmd : uint16_t
     Login,
     Register,
     Destory,
+    JOIN,
+    OBTAINSTREAM,
+    CREATESTREAM,
+    PLAYSTREAM,
+    DELETESTREAM,
 };
 
 enum ResultCode
@@ -219,6 +224,185 @@ struct Monitor_body : public packet_head {
     uint8_t mem;
     std::array<char, 16> ip;
     uint16_t port;
+};
+
+struct Join_body : public packet_head
+{
+    Join_body() : packet_head()
+    {
+        cmd = JOIN;
+        len = sizeof(Join_body);
+        id.fill('\0');
+    }
+
+    void SetId(const std::string& str)
+    {
+        str.copy(id.data(), id.size(), 0);
+    }
+
+    std::string GetId()
+    {
+        return std::string(id.data());
+    }
+
+    std::array<char, 10> id;
+};
+
+struct JoinReply_body : public packet_head
+{
+    JoinReply_body() : packet_head()
+    {
+        cmd = JOIN;
+        len = sizeof(JoinReply_body);
+        result = SERVER_ERROR;
+    }
+
+    void SetCode(const ResultCode code)
+    {
+        result = code;
+    }
+
+    ResultCode result;
+};
+
+struct ObtainStream_body : public packet_head
+{
+    ObtainStream_body() : packet_head()
+    {
+        cmd = OBTAINSTREAM;
+        len = sizeof(ObtainStream_body);
+        id.fill('\0');
+    }
+
+    void SetId(const std::string& str)
+    {
+        str.copy(id.data(), id.size(), 0);
+    }
+
+    std::string GetId()
+    {
+        return std::string(id.data());
+    }
+
+    std::array<char, 10> id;
+};
+
+struct ObtainStreamReply_body : public packet_head
+{
+    ObtainStreamReply_body() : packet_head()
+    {
+        cmd = OBTAINSTREAM;
+        len = sizeof(ObtainStreamReply_body);
+        result = SERVER_ERROR;
+    }
+
+    void SetCode(const ResultCode code)
+    {
+        result = code;
+    }
+
+    ResultCode result;
+};
+
+struct CreateStream_body : public packet_head
+{
+    CreateStream_body() : packet_head()
+    {
+        cmd = CREATESTREAM;
+        len = sizeof(CreateStream_body);
+    }
+};
+
+struct CreateStreamReply_body : public packet_head
+{
+    CreateStreamReply_body() : packet_head()
+    {
+        cmd = CREATESTREAM;
+        len = sizeof(CreateStreamReply_body);
+        result = SERVER_ERROR;
+        streamAddres.fill('\0');
+    }
+
+    void SetstreamAddres(const std::string& str)
+    {
+        str.copy(streamAddres.data(), streamAddres.size(), 0);
+    }
+
+    std::string GetstreamAddres()
+    {
+        return std::string(streamAddres.data());
+    }
+
+    void SetCode(const ResultCode code)
+    {
+        result = code;
+    }
+
+    ResultCode result;
+    std::array<char, 70> streamAddres;
+};
+
+struct PlayStream_body : public packet_head
+{
+    PlayStream_body() : packet_head()
+    {
+        cmd = PLAYSTREAM;
+        len = sizeof(PlayStream_body);
+        result = SERVER_ERROR;
+        streamAddres.fill('\0');
+    }
+
+    void SetstreamAddres(const std::string& str)
+    {
+        str.copy(streamAddres.data(), streamAddres.size(), 0);
+    }
+
+    std::string GetstreamAddres()
+    {
+        return std::string(streamAddres.data());
+    }
+
+    void SetCode(const ResultCode code)
+    {
+        result = code;
+    }
+
+    ResultCode result;
+    std::array<char, 70> streamAddres;
+};
+
+struct PlayStreamReplay_body : public packet_head
+{
+    PlayStreamReplay_body() : packet_head()
+    {
+        cmd = PLAYSTREAM;
+        len = sizeof(PlayStreamReplay_body);
+        result = SERVER_ERROR;
+    }
+
+    void SetCode(const ResultCode code)
+    {
+        result = code;
+    }
+
+    ResultCode result;
+};
+
+struct DeleteStream_body : public packet_head
+{
+    DeleteStream_body() : packet_head()
+    {
+        cmd = DELETESTREAM;
+        streamCount = -1;
+        len = sizeof(DeleteStream_body);
+    }
+
+    void SetStreamCount(const int count)
+    {
+        streamCount = count;
+    }
+
+    int streamCount;
 };
 
 typedef std::pair<int,Monitor_body*> MinotorPair;
