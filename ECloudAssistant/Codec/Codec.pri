@@ -2,9 +2,11 @@ HEADERS += \
     $$PWD/AACEncoder.h \
     $$PWD/AVCommon.h \
     $$PWD/AudioEncoder.h \
-    $$PWD/AudioResampler.h
+    $$PWD/AudioResampler.h \
+    $$PWD/VideoConvert.h
 
 SOURCES += \
     $$PWD/AACEncoder.cpp \
     $$PWD/AudioEncoder.cpp \
-    $$PWD/AudioResampler.cpp
+    $$PWD/AudioResampler.cpp \
+    $$PWD/VideoConvert.cpp
