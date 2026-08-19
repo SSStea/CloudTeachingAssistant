@@ -1,8 +1,13 @@
+INCLUDEPATH += $$PWD \
+               $$PWD/capture \
+               $$PWD/rtmp
+
 HEADERS += \
     $$PWD/capture/AudioBuffer.h \
     $$PWD/capture/AudioCapture.h \
     $$PWD/capture/GDIScreenScapture.h \
-    $$PWD/capture/WASAPICapture.h
+    $$PWD/capture/WASAPICapture.h \
+    $$PWD/rtmp/Rtmp.h
 
 SOURCES += \
     $$PWD/capture/AudioCapture.cpp \
