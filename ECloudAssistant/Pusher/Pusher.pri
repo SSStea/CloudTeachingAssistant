@@ -9,6 +9,7 @@ HEADERS += \
     $$PWD/capture/WASAPICapture.h \
     $$PWD/rtmp/Amf.h \
     $$PWD/rtmp/Rtmp.h \
+    $$PWD/rtmp/RtmpChunk.h \
     $$PWD/rtmp/RtmpHandshake.h \
     $$PWD/rtmp/RtmpMessage.h
 
@@ -17,6 +18,7 @@ SOURCES += \
     $$PWD/capture/GDIScreenScapture.cpp \
     $$PWD/capture/WASAPICapture.cpp \
     $$PWD/rtmp/Amf.cpp \
+    $$PWD/rtmp/RtmpChunk.cpp \
     $$PWD/rtmp/RtmpHandshake.cpp
 
 INCLUDEPATH += $(FFMPEG_HOME)/include
