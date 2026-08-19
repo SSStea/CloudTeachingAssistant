@@ -7,6 +7,7 @@ HEADERS += \
     $$PWD/EventLoop.h \
     $$PWD/ReactorBase.h \
     $$PWD/ReactorSelect.h \
+    $$PWD/SigConnection.h \
     $$PWD/TcpConnection.h \
     $$PWD/TcpSocket.h \
     $$PWD/TimeStamp.h \
@@ -18,6 +19,7 @@ SOURCES += \
     $$PWD/EventLoop.cpp \
     $$PWD/ReactorBase.cpp \
     $$PWD/ReactorSelect.cpp \
+    $$PWD/SigConnection.cpp \
     $$PWD/TcpConnection.cpp \
     $$PWD/TcpSocket.cpp \
     $$PWD/Timer.cpp
