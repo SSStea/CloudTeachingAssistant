@@ -121,3 +121,42 @@ private:
 	AmfObject m_obj;
 	mapAmfObjects m_objs;
 };
+
+class CAmfEncoder
+{
+public:
+	CAmfEncoder(uint32_t nSize = 1024);
+	virtual ~CAmfEncoder();
+
+	void Reset()
+	{
+		m_nIndex = 0;
+	}
+
+	std::shared_ptr<char> pData()
+	{
+		return m_pData;
+	}
+
+	uint32_t nSize() const
+	{
+		return m_nIndex;
+	}
+
+	void encodeString(const char* pStr, int nLen, bool bIsObject = true);
+	void encodeNumber(double fValue);
+	void encodeBoolean(int nValue);
+	void encodeObjects(mapAmfObjects& objs);
+	void encodeECMA(mapAmfObjects& objs);
+
+private:
+	void encodeInt8(int8_t nValue);
+	void encodeInt16(int16_t nValue);
+	void encodeInt24(int32_t nValue);
+	void encodeInt32(int32_t nValue);
+	void realloc(uint32_t nSize);
+
+	std::shared_ptr<char> m_pData;
+	uint32_t m_nSize = 0;
+	uint32_t m_nIndex = 0;
+};
