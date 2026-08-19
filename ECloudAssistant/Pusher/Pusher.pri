@@ -10,6 +10,7 @@ HEADERS += \
     $$PWD/rtmp/Amf.h \
     $$PWD/rtmp/Rtmp.h \
     $$PWD/rtmp/RtmpChunk.h \
+    $$PWD/rtmp/RtmpConnection.h \
     $$PWD/rtmp/RtmpHandshake.h \
     $$PWD/rtmp/RtmpMessage.h
 
@@ -19,6 +20,7 @@ SOURCES += \
     $$PWD/capture/WASAPICapture.cpp \
     $$PWD/rtmp/Amf.cpp \
     $$PWD/rtmp/RtmpChunk.cpp \
+    $$PWD/rtmp/RtmpConnection.cpp \
     $$PWD/rtmp/RtmpHandshake.cpp
 
 INCLUDEPATH += $(FFMPEG_HOME)/include
