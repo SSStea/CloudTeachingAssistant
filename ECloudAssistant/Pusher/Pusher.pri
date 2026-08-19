@@ -14,7 +14,8 @@ HEADERS += \
 SOURCES += \
     $$PWD/capture/AudioCapture.cpp \
     $$PWD/capture/GDIScreenScapture.cpp \
-    $$PWD/capture/WASAPICapture.cpp
+    $$PWD/capture/WASAPICapture.cpp \
+    $$PWD/rtmp/Amf.cpp
 
 INCLUDEPATH += $(FFMPEG_HOME)/include
 
