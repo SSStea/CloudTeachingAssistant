@@ -7,6 +7,7 @@ HEADERS += \
     $$PWD/capture/AudioCapture.h \
     $$PWD/capture/GDIScreenScapture.h \
     $$PWD/capture/WASAPICapture.h \
+    $$PWD/rtmp/Amf.h \
     $$PWD/rtmp/Rtmp.h \
     $$PWD/rtmp/RtmpMessage.h
 
