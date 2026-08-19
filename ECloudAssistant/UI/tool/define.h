@@ -18,6 +18,10 @@ enum Cmd : uint16_t
     CREATESTREAM,
     PLAYSTREAM,
     DELETESTREAM,
+    MOUSE,
+    MOUSEMOVE,
+    KEY,
+    WHEEL,
 };
 
 enum ResultCode
@@ -403,6 +407,71 @@ struct DeleteStream_body : public packet_head
     }
 
     int streamCount;
+};
+
+enum MouseType : uint8_t
+{
+    NoButton = 0,
+    LeftButton = 1,
+    RightButton = 2,
+    MiddleButton = 4,
+    XButton1 = 8,
+    XButton2 = 16,
+};
+
+enum MouseKeyType : uint8_t
+{
+    PRESS,
+    RELEASE
+};
+
+struct Key_Body : public packet_head
+{
+    Key_Body() : packet_head()
+    {
+        cmd = KEY;
+        len = sizeof(Key_Body);
+    }
+
+    MouseKeyType type;
+    uint16_t key;
+};
+
+struct Wheel_Body : public packet_head
+{
+    Wheel_Body() : packet_head()
+    {
+        cmd = WHEEL;
+        len = sizeof(Wheel_Body);
+    }
+
+    int8_t wheel;
+};
+
+struct MouseMove_Body : public packet_head
+{
+    MouseMove_Body() : packet_head()
+    {
+        cmd = MOUSEMOVE;
+        len = sizeof(MouseMove_Body);
+    }
+
+    uint8_t xl_ratio;
+    uint8_t xr_ratio;
+    uint8_t yl_ratio;
+    uint8_t yr_ratio;
+};
+
+struct Mouse_Body : public packet_head
+{
+    Mouse_Body() : packet_head()
+    {
+        cmd = MOUSE;
+        len = sizeof(Mouse_Body);
+    }
+
+    MouseKeyType type;
+    MouseType mouseButtons;
 };
 
 typedef std::pair<int,Monitor_body*> MinotorPair;
