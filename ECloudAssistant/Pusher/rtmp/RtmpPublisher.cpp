@@ -1,6 +1,7 @@
 #include "RtmpPublisher.h"
 
 #include <cstring>
+#include <QDebug>
 
 std::shared_ptr<CRtmpPublisher> CRtmpPublisher::pCreate(CEventLoop* pEventLoop)
 {
@@ -82,6 +83,7 @@ int CRtmpPublisher::nOpenUrl(std::string strUrl, int nMsec)
 {
 	if (nParseRtmpUrl(strUrl) != 0)
 	{
+        qDebug() << "nParseRtmpUrl fail";
 		return -1;
 	}
 
@@ -98,6 +100,7 @@ int CRtmpPublisher::nOpenUrl(std::string strUrl, int nMsec)
 	if (!tcpSocket.bConnect(m_strIP, m_nPort, nMsec))
 	{
 		tcpSocket.Close();
+        qDebug() << "tcpSocket.bConnect fail";
 		return -1;
 	}
 
