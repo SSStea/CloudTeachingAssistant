@@ -33,5 +33,43 @@
         <file>UI/brown/titlebar/user.png</file>
         <file>UI/brown/titlebar/vip-off.png</file>
         <file>UI/brown/titlebar/vip-on.png</file>
+        <file>UI/brown/center/adapt.png</file>
+        <file>UI/brown/center/adapt_hover.png</file>
+        <file>UI/brown/center/add.png</file>
+        <file>UI/brown/center/amplification_hover.png</file>
+        <file>UI/brown/center/close.png</file>
+        <file>UI/brown/center/close_hover.png</file>
+        <file>UI/brown/center/delete.png</file>
+        <file>UI/brown/center/delete_hover.png</file>
+        <file>UI/brown/center/Exit_screen.png</file>
+        <file>UI/brown/center/Exit_screen_hover.png</file>
+        <file>UI/brown/center/favicon-32 .png</file>
+        <file>UI/brown/center/favicon-32.ico</file>
+        <file>UI/brown/center/Full_screen.png</file>
+        <file>UI/brown/center/Full_screen_hover.png</file>
+        <file>UI/brown/center/left_rotating.png</file>
+        <file>UI/brown/center/left_rotating_hover.png</file>
+        <file>UI/brown/center/loading.gif</file>
+        <file>UI/brown/center/more.png</file>
+        <file>UI/brown/center/narrow.png</file>
+        <file>UI/brown/center/narrow_hover.png</file>
+        <file>UI/brown/center/new_copy.png</file>
+        <file>UI/brown/center/old_copy.png</file>
+        <file>UI/brown/center/quit_fullscreen.png</file>
+        <file>UI/brown/center/quit_fullscreen_hover.png</file>
+        <file>UI/brown/center/quit_fullscreen_press.png</file>
+        <file>UI/brown/center/right_rotating.png</file>
+        <file>UI/brown/center/right_rotating_hover.png</file>
+        <file>UI/brown/center/save.png</file>
+        <file>UI/brown/center/save_hover.png</file>
+        <file>UI/brown/center/shadow.png</file>
+        <file>UI/brown/center/src.png</file>
+        <file>UI/brown/center/src_hover.png</file>
+        <file>UI/brown/center/turnleft.png</file>
+        <file>UI/brown/center/turnleft_hover.png</file>
+        <file>UI/brown/center/turnleft_press.png</file>
+        <file>UI/brown/center/turnright.png</file>
+        <file>UI/brown/center/turnright_hover.png</file>
+        <file>UI/brown/center/turnright_press.png</file>
     </qresource>
 </RCC>
