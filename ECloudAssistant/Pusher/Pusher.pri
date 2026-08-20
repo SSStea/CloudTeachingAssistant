@@ -13,7 +13,8 @@ HEADERS += \
     $$PWD/rtmp/RtmpConnection.h \
     $$PWD/rtmp/RtmpHandshake.h \
     $$PWD/rtmp/RtmpMessage.h \
-    $$PWD/rtmp/RtmpPublisher.h
+    $$PWD/rtmp/RtmpPublisher.h \
+    $$PWD/rtmp/RtmpPushManager.h
 
 SOURCES += \
     $$PWD/capture/AudioCapture.cpp \
@@ -23,7 +24,8 @@ SOURCES += \
     $$PWD/rtmp/RtmpChunk.cpp \
     $$PWD/rtmp/RtmpConnection.cpp \
     $$PWD/rtmp/RtmpHandshake.cpp \
-    $$PWD/rtmp/RtmpPublisher.cpp
+    $$PWD/rtmp/RtmpPublisher.cpp \
+    $$PWD/rtmp/RtmpPushManager.cpp
 
 INCLUDEPATH += $(FFMPEG_HOME)/include
 
