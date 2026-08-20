@@ -82,6 +82,6 @@ void LoginTest()
 
 int main()
 {
-	LoginTest();
+	RtmpSeverTest();
     return 0;
 }

@@ -339,11 +339,25 @@ bool CRtmpConnection::bHandleConnection()
 	SetChunkSize();
 
 	//应答
-	AmfObject ackAmfObj;
+	mapAmfObjects ackAmfObj;
 	m_amfEncoder.Reset();
 	//编码结果
 	m_amfEncoder.encodeString("_result", 7);
 	m_amfEncoder.encodeNumber(m_amfDecoder.fGetNumber());
+
+	ackAmfObj["fmsVer"] = AmfObject(std::string("FMS/4,5,0,297"));
+	ackAmfObj["capabilities"] = AmfObject(255.0);
+	ackAmfObj["mode"] = AmfObject(1.0);
+	m_amfEncoder.encodeObjects(ackAmfObj);
+	//清空对象
+	ackAmfObj.clear();
+	//添加参数
+	ackAmfObj["level"] = AmfObject(std::string("status"));
+	ackAmfObj["code"] = AmfObject(std::string("NetConnection.Connect.Success"));
+	ackAmfObj["description"] = AmfObject(std::string("Connection succeeded"));
+	ackAmfObj["objectEncoding"] = AmfObject(0.0);
+	m_amfEncoder.encodeObjects(ackAmfObj);
+
 	if (!bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder.pData(), m_amfEncoder.nSize()))
 	{
 		std::cout << "bHandleConnection send invoke message fail" << std::endl;
