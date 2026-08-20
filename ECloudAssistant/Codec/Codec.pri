@@ -3,6 +3,7 @@ INCLUDEPATH += $$PWD
 HEADERS += \
     $$PWD/AACEncoder.h \
     $$PWD/AVCommon.h \
+    $$PWD/AVQueue.h \
     $$PWD/AudioEncoder.h \
     $$PWD/AudioResampler.h \
     $$PWD/H264Encoder.h \
