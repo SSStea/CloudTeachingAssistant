@@ -130,9 +130,10 @@ AVPacketPtr CVideoEncoder::pEncode(const quint8 *pData, quint32 nWidth, quint32 
 
         m_pRgbaFrame->width = m_nWidth;
         m_pRgbaFrame->height = m_nHeight;
+        m_pRgbaFrame->format = m_config.video.format;
 
         //获取内存
-        if(av_frame_get_buffer(m_pRgbaFrame.get(), 0) != 0)
+        if(av_frame_get_buffer(m_pRgbaFrame.get(), 32) != 0)//4字节rgba
         {
             qDebug() << "av_frame_get_buffer fail";
             return nullptr;
