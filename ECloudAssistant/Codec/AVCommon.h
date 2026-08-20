@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <memory>
 #include <mutex>
+#include "AVQueue.h"
 extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
@@ -38,6 +39,28 @@ struct AVConfig
     AudioConfig audio;
 };
 
+struct AVContext
+{
+public:
+    //音频相关参数//
+    int32_t nAudioSampleRate;
+    int32_t nAudioChannelsLayout;
+    AVRational audioSrcTimebase;
+    AVRational audioDstTimebase;
+    AVSampleFormat audioFmt;
+    double dAudioDuration;
+    CAVQueue<AVFramePtr> qAudioQueue;
+    //视频相关参数
+    int32_t nVideoWidth;
+    int32_t nVideoHeight;
+    AVRational videoSrcTimebase;
+    AVRational videodstTimebase;
+    AVPixelFormat videoFmt;
+    double dVideoDuration;
+    CAVQueue<AVFramePtr> qVideoQueue;
+
+    int nAvMediatype = 0;
+};
 
 class CEncodBase
 {
