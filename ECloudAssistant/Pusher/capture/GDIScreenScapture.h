@@ -12,6 +12,7 @@ using FrameContainer = std::vector<quint8>;
 
 class CGDIScreenScapture : public QThread
 {
+public:
     CGDIScreenScapture();
     CGDIScreenScapture(const CGDIScreenScapture&) = delete;
     CGDIScreenScapture& operator=(const CGDIScreenScapture&) = delete;

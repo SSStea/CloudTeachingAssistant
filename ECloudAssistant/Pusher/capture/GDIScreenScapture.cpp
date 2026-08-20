@@ -65,7 +65,7 @@ bool CGDIScreenScapture::bInit(qint64 nDisplayIndex)
     av_dict_set_int(&options, "offset_x", 0, AV_DICT_MATCH_CASE);
     av_dict_set_int(&options, "offset_y", 0, AV_DICT_MATCH_CASE);
     //设置录制的分辨率
-    av_dict_set(&options, "vedio_size", "1920*1080", 1);
+    av_dict_set(&options, "video_size", "1920x1080", 1);
 
     //创建输入format
     m_pInputFormat = const_cast<AVInputFormat*>(av_find_input_format("gdigrab"));
@@ -197,6 +197,8 @@ bool CGDIScreenScapture::bCaptureFrame(FrameContainer &rgba, quint32 &nWidth, qu
     rgba.assign(m_pRgbaFrame.get(), m_pRgbaFrame.get() + m_nFrameSize);
     nWidth = m_nWidth;
     nHeight = m_nHeight;
+
+    return true;
 }
 
 void CGDIScreenScapture::run()
@@ -306,4 +308,6 @@ bool CGDIScreenScapture::bDecode(AVFrame *pAvFrame, AVPacket *pAvPacket)
         }
         av_frame_unref(pAvFrame);
     }
+
+    return true;
 }
