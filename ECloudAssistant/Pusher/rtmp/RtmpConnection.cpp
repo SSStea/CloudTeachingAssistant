@@ -14,6 +14,9 @@ CRtmpConnection::CRtmpConnection(CReactorBase* pReactor, int nSocket, CRtmp* pRt
 	: CTcpConnection(pReactor, nSocket)
 	, m_pRtmpChunk(new CRtmpChunk())
 {
+    m_amfDecoder.reset(new CAmfDecoder());
+    m_amfEncoder.reset(new CAmfEncoder());
+
 	m_nMaxChunkSize = pRtmp->nGetChunkSize();
 	m_strStreamPath = pRtmp->strGetStreamPath();
 	m_strStreamName = pRtmp->strGetStreamName();
@@ -123,16 +126,16 @@ bool CRtmpConnection::bHandleMessage(RtmpMessage& rtmpMsg)
 
 bool CRtmpConnection::bHandleInvoke(RtmpMessage& rtmpMsg)
 {
-	m_amfDecoder.Reset();
+    m_amfDecoder->Reset();
 
-	int nBytesUsed = m_amfDecoder.nDecode(rtmpMsg.pPlayload.get(), (int)rtmpMsg.nLength, 1);
+    int nBytesUsed = m_amfDecoder->nDecode(rtmpMsg.pPlayload.get(), (int)rtmpMsg.nLength, 1);
 	if (nBytesUsed < 0)
 	{
 		return false;
 	}
 
-	std::string strMethod = m_amfDecoder.strGetString();
-	nBytesUsed = m_amfDecoder.nDecode(
+    std::string strMethod = m_amfDecoder->strGetString();
+    nBytesUsed = m_amfDecoder->nDecode(
 		rtmpMsg.pPlayload.get() + nBytesUsed,
 		(int)rtmpMsg.nLength - nBytesUsed);
 
@@ -161,15 +164,15 @@ bool CRtmpConnection::bHandshake()
 bool CRtmpConnection::bConnect()
 {
 	mapAmfObjects mapObjects;
-	m_amfEncoder.Reset();
-	m_amfEncoder.encodeString("connect", 7);
-	m_amfEncoder.encodeNumber((double)++m_nNumber);
+    m_amfEncoder->Reset();
+    m_amfEncoder->encodeString("connect", 7);
+    m_amfEncoder->encodeNumber((double)++m_nNumber);
 	mapObjects["app"] = AmfObject(m_strAppName);
 	mapObjects["type"] = AmfObject(std::string("nonprivate"));
-	m_amfEncoder.encodeObjects(mapObjects);
+    m_amfEncoder->encodeObjects(mapObjects);
 
 	m_state = START_CONNECT;
-	bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder.pData(), m_amfEncoder.nSize());
+    bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder->pData(), m_amfEncoder->nSize());
 	qDebug() << "Connect";
 	return true;
 }
@@ -177,13 +180,13 @@ bool CRtmpConnection::bConnect()
 bool CRtmpConnection::bCreateStream()
 {
 	mapAmfObjects mapObjects;
-	m_amfEncoder.Reset();
-	m_amfEncoder.encodeString("createStream", 12);
-	m_amfEncoder.encodeNumber((double)++m_nNumber);
-	m_amfEncoder.encodeObjects(mapObjects);
+    m_amfEncoder->Reset();
+    m_amfEncoder->encodeString("createStream", 12);
+    m_amfEncoder->encodeNumber((double)++m_nNumber);
+    m_amfEncoder->encodeObjects(mapObjects);
 
 	m_state = START_CREATE_STREAM;
-	bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder.pData(), m_amfEncoder.nSize());
+    bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder->pData(), m_amfEncoder->nSize());
 	qDebug() << "CreateStream";
 	return true;
 }
@@ -191,14 +194,14 @@ bool CRtmpConnection::bCreateStream()
 bool CRtmpConnection::bPublish()
 {
 	mapAmfObjects mapObjects;
-	m_amfEncoder.Reset();
-	m_amfEncoder.encodeString("publish", 7);
-	m_amfEncoder.encodeNumber((double)++m_nNumber);
-	m_amfEncoder.encodeObjects(mapObjects);
-	m_amfEncoder.encodeString(m_strStreamName.c_str(), (int)m_strStreamName.size());
+    m_amfEncoder->Reset();
+    m_amfEncoder->encodeString("publish", 7);
+    m_amfEncoder->encodeNumber((double)++m_nNumber);
+    m_amfEncoder->encodeObjects(mapObjects);
+    m_amfEncoder->encodeString(m_strStreamName.c_str(), (int)m_strStreamName.size());
 
 	m_state = START_PUBLISH;
-	bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder.pData(), m_amfEncoder.nSize());
+    bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder->pData(), m_amfEncoder->nSize());
 	qDebug() << "Publish";
 	return true;
 }
@@ -206,14 +209,14 @@ bool CRtmpConnection::bPublish()
 bool CRtmpConnection::bDeleteStream()
 {
 	mapAmfObjects mapObjects;
-	m_amfEncoder.Reset();
-	m_amfEncoder.encodeString("DeleteStream", 12);
-	m_amfEncoder.encodeNumber((double)++m_nNumber);
-	m_amfEncoder.encodeObjects(mapObjects);
-	m_amfEncoder.encodeNumber(m_nStreamId);
+    m_amfEncoder->Reset();
+    m_amfEncoder->encodeString("DeleteStream", 12);
+    m_amfEncoder->encodeNumber((double)++m_nNumber);
+    m_amfEncoder->encodeObjects(mapObjects);
+    m_amfEncoder->encodeNumber(m_nStreamId);
 
 	m_state = START_DELETE_STREAM;
-	return bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder.pData(), m_amfEncoder.nSize());
+    return bSendInvokeMessage(RTMP_CHUNK_INVOKE_ID, m_amfEncoder->pData(), m_amfEncoder->nSize());
 }
 
 bool CRtmpConnection::bHandleResult(RtmpMessage& rtmpMsg)
@@ -222,18 +225,18 @@ bool CRtmpConnection::bHandleResult(RtmpMessage& rtmpMsg)
 
 	if (m_state == START_CONNECT)
 	{
-		if (m_amfDecoder.bHasObject("code"))
+        if (m_amfDecoder->bHasObject("code"))
 		{
-			AmfObject amfObject = m_amfDecoder.GetObject("code");
+            AmfObject amfObject = m_amfDecoder->GetObject("code");
 			if (amfObject.strAmfString == "NetConnection.Connect.Success")
 			{
 				return bCreateStream();
 			}
 		}
 	}
-	else if (m_state == START_CREATE_STREAM && m_amfDecoder.fGetNumber() > 0)
+    else if (m_state == START_CREATE_STREAM && m_amfDecoder->fGetNumber() > 0)
 	{
-		m_nStreamId = (uint32_t)m_amfDecoder.fGetNumber();
+        m_nStreamId = (uint32_t)m_amfDecoder->fGetNumber();
 		return bPublish();
 	}
 
@@ -244,12 +247,12 @@ bool CRtmpConnection::bHandleOnStatus(RtmpMessage& rtmpMsg)
 {
 	(void)rtmpMsg;
 
-	if (!m_amfDecoder.bHasObject("code"))
+    if (!m_amfDecoder->bHasObject("code"))
 	{
 		return true;
 	}
 
-	AmfObject amfObject = m_amfDecoder.GetObject("code");
+    AmfObject amfObject = m_amfDecoder->GetObject("code");
 	if (m_state == START_PUBLISH)
 	{
 		if (amfObject.strAmfString == "NetStream.Publish.Start")

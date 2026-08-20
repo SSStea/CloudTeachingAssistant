@@ -68,8 +68,8 @@ private:
 	std::weak_ptr<CRtmpPublisher> m_pRtmpPublisher;
 	std::shared_ptr<CRtmpHandshake> m_pHandshake;
 	std::shared_ptr<CRtmpChunk> m_pRtmpChunk;
-	CAmfDecoder m_amfDecoder;
-	CAmfEncoder m_amfEncoder;
+    std::unique_ptr<CAmfDecoder> m_amfDecoder;
+    std::unique_ptr<CAmfEncoder> m_amfEncoder;
 
 	std::shared_ptr<char> m_pAvcSequenceHeader;
 	std::shared_ptr<char> m_pAacSequenceHeader;
