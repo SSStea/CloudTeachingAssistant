@@ -77,10 +77,10 @@ public:
         m_queue.push(packet);
     }
     bool bPop(T& packet) {
-        return m_queue.pop(packet);
+        return m_queue.bPop(packet);
     }
-    bool bEmpty() const { return m_queue.empty(); }
-    int nSize() const { return m_queue.size(); }
+    bool bEmpty() const { return m_queue.bEmpty(); }
+    int nSize() const { return m_queue.nSize(); }
     void clear() {
         m_queue.clear();
     }
