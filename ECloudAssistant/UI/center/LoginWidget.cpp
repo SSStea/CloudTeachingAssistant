@@ -86,7 +86,7 @@ void CLoginWidget::HandleMessage(const packet_head *data)
         HandleRegister((RegisterResult*)data);
         break;
 
-    case ERROR:
+    case ERROR_:
         HandleError((packet_head*)data);
         break;
     default:
@@ -103,7 +103,7 @@ void CLoginWidget::HandleLogin(LoginResult *data)
 {
     if(m_bIsLogin)
     {
-        if(data->resultCode == S_OK)
+        if(data->resultCode == S_OK_)
         {
             std::string sigserver = data->GetIp();
             qDebug() << "login success, sigserver ip:" << sigserver.c_str()

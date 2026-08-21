@@ -9,7 +9,7 @@
 enum Cmd : uint16_t
 {
     Minotor,
-    ERROR,
+    ERROR_,
     Login,
     Register,
     Destory,
@@ -26,7 +26,7 @@ enum Cmd : uint16_t
 
 enum ResultCode
 {
-    S_OK = 0,
+    S_OK_ = 0,
     SERVER_ERROR ,
     REQUEST_TIMEOUT ,
     ALREADY_REDISTERED ,
