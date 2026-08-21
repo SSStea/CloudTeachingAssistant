@@ -71,5 +71,7 @@
         <file>UI/brown/center/turnright.png</file>
         <file>UI/brown/center/turnright_hover.png</file>
         <file>UI/brown/center/turnright_press.png</file>
+        <file>UI/brown/fragment.fsh</file>
+        <file>UI/brown/vertex.vsh</file>
     </qresource>
 </RCC>
