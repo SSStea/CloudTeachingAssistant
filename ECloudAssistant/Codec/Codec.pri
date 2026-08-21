@@ -1,6 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
+    $$PWD/AACDecoder.h \
     $$PWD/AACEncoder.h \
     $$PWD/AVCommon.h \
     $$PWD/AVDEMuxer.h \
@@ -13,6 +14,7 @@ HEADERS += \
     $$PWD/VideoEncoder.h
 
 SOURCES += \
+    $$PWD/AACDecoder.cpp \
     $$PWD/AACEncoder.cpp \
     $$PWD/AVDEMuxer.cpp \
     $$PWD/AudioEncoder.cpp \
