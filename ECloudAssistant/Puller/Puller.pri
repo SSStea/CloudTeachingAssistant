@@ -1,7 +1,7 @@
-INCLUDEPATH += $$PWD
+INCLUDEPATH += $$PWD/UI
 
 HEADERS += \
-    $$PWD/PullerWidget.h
+    $$PWD/UI/PullerWidget.h
 
 SOURCES += \
-    $$PWD/PullerWidget.cpp
+    $$PWD/UI/PullerWidget.cpp
