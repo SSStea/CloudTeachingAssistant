@@ -112,12 +112,12 @@ void CH264Decoder::run()
             nRet = avcodec_receive_frame(m_pCodecCtx, m_pYuvFrame.get());
             if(nRet == AVERROR(EAGAIN) || nRet == AVERROR_EOF)
             {
-                qDebug() << "avcodec_receive_frame: nRet == AVERROR(EAGAIN) || nRet == AVERROR_EOF, fail";
+                //qDebug() << "avcodec_receive_frame: nRet == AVERROR(EAGAIN) || nRet == AVERROR_EOF, fail";
                 break;
             }
             else if(nRet < 0)
             {
-                qDebug() << "avcodec_receive_frame: nRet < 0, fail";
+                //qDebug() << "avcodec_receive_frame: nRet < 0, fail";
                 break;
             }
 
