@@ -4,6 +4,8 @@
 #include "AVCommon.h"
 #include <thread>
 
+class CAACDecoder;
+class CH264Decoder;
 class CAVDEMuxer
 {
 public:
@@ -29,8 +31,8 @@ private:
     AVFormatContext* m_pFormateCtx = nullptr;
     std::unique_ptr<std::thread> m_pReadthread;
     //解码器
-    // std::unique_ptr<AAC_Decoder> aacDecoder_;
-    // std::unique_ptr<H264_Decoder> h264Decoder_;
+    std::unique_ptr<CAACDecoder> m_pAACDecoder;
+    std::unique_ptr<CH264Decoder> m_pH264Decoder;
 };
 
 #endif // AVDEMUXER_H

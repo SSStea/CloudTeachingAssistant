@@ -1,9 +1,14 @@
 #include "AVDEMuxer.h"
 #include <QDebug>
+#include "AACDecoder.h"
+#include "H264Decoder.h"
 
 CAVDEMuxer::CAVDEMuxer(AVContext *ac)
     :m_pAvContext(ac), m_pAvDict(nullptr), m_pReadthread(nullptr)
 {
+    m_pAACDecoder.reset(new CAACDecoder(m_pAvContext));
+    m_pH264Decoder.reset(new CH264Decoder(m_pAvContext));
+
     //设置字典
     av_dict_set(&m_pAvDict, "stimeout", "1000000", 0);
     av_dict_set(&m_pAvDict, "analyzeduration", "0", 0);//分析时长，快速播放
@@ -94,10 +99,12 @@ void CAVDEMuxer::FetchStream(const std::string &strPath)
             if(pkt->stream_index == m_nVideoIndex)//h264数据包
             {
                 //将数据传到h264解码器队列中
+                m_pH264Decoder->PutPacket(pkt);
             }
             else if(pkt->stream_index == m_nAudioIndex)
             {
                 //将数据传到aac解码器队列中
+                m_pAACDecoder->PutPacket(pkt);
             }
             else
             {
@@ -152,11 +159,23 @@ bool CAVDEMuxer::bFetchStreamInfo(const std::string &strPath)
     if(m_nVideoIndex != -1)//存在视频流
     {
         //初始化视频编码器
+        if(m_pH264Decoder->nOpen(m_pFormateCtx->streams[m_nVideoIndex]->codecpar) != 0)
+        {
+            m_pH264Decoder.reset();
+            m_pH264Decoder = nullptr;
+            return false;
+        }
 
     }
     if(m_nAudioIndex != -1)//存在音频流
     {
         //初始化音频解码器
+        if(m_pAACDecoder->nOpen(m_pFormateCtx->streams[m_nAudioIndex]->codecpar) != 0)
+        {
+            m_pAACDecoder.reset();
+            m_pAACDecoder = nullptr;
+            return false;
+        }
     }
 
     return true;

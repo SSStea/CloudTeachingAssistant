@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include "define.h"
+#include <QVBoxLayout>
 
 CPullerWidget::CPullerWidget(QWidget *parent)
     : QMainWindow{parent}
@@ -16,10 +17,25 @@ CPullerWidget::CPullerWidget(QWidget *parent)
     setWindowIcon(QIcon(":/UI/brown/center/favicon-32.ico"));
     //设置窗口背景颜色
     setStyleSheet("background-color:#121212");
+
+    m_pPlayer.reset(new CAVPlayer(this));
+    //布局
+    QVBoxLayout* layout = new QVBoxLayout(this);
+
+    layout->addWidget(m_pPlayer.get());
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    this->setLayout(layout);
+}
+
+void CPullerWidget::Open(const QString &strStreamPath)
+{
+    m_pPlayer->Open(strStreamPath);
 }
 
 void CPullerWidget::resizeEvent(QResizeEvent *event)
 {
+    m_pPlayer->resize(event->size());
     QMainWindow::resizeEvent(event);
 }
 
