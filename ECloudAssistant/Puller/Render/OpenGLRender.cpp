@@ -1,4 +1,6 @@
 #include "OpenGLRender.h"
+#include <QShowEvent>
+#include <QMovie>
 //添加着色器
 
 static GLfloat vertices[] = {
@@ -23,6 +25,8 @@ COpenGLRender::COpenGLRender(QWidget *parent, Qt::WindowFlags f)
     this->setMouseTracking(true);
     this->resize(parent->size());
     this->setMinimumSize(400, 250);
+    m_pLabel = new QLabel(this);
+    m_pLabel->resize(parent->size());
 }
 
 COpenGLRender::~COpenGLRender()
@@ -51,6 +55,13 @@ void COpenGLRender::Repaint(AVFramePtr frame)
     {
         return ;
     }
+    //开始绘制时结束loading.gif
+    if(m_pLabel)
+    {
+        m_pLabel->hide();
+        delete m_pLabel;
+        m_pLabel = nullptr;
+    }
 
     //更新yuv纹理
     repaintTexYUV420P(frame);
@@ -65,7 +76,15 @@ void COpenGLRender::GetPosRation(MouseMove_Body &body)
 
 void COpenGLRender::showEvent(QShowEvent *event)
 {
+    QMovie* movie = new QMovie(":/UI/brown/center/loading.gif");
+    if(m_pLabel)
+    {
+        m_pLabel->setMovie(movie);
+        movie->start();
+        m_pLabel->show();
+    }
 
+    //COpenGLRender::showEvent(event);
 }
 
 void COpenGLRender::initializeGL()
@@ -101,7 +120,7 @@ void COpenGLRender::initializeGL()
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
     glGenBuffers(1, &m_EBO);
-    glBindBuffer(GL_ARRAY_BUFFER, m_EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 
     //创建一个新的数据存储
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);//准备一个数组
@@ -150,6 +169,10 @@ void COpenGLRender::resizeGL(int w, int h)
 
     //更新宽高
     this->update(QRect(0, 0, w, h));
+    if(m_pLabel)
+    {
+        m_pLabel->resize(w, h);
+    }
 }
 
 void COpenGLRender::paintGL()
