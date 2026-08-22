@@ -1,8 +1,8 @@
-#include "H264Deocder.h"
+#include "H264Decoder.h"
 #include "VideoConvert.h"
 #include <QDebug>
 
-CH264Deocder::CH264Deocder(AVContext *ac, QObject *parent)
+CH264Decoder::CH264Decoder(AVContext *ac, QObject *parent)
     :QThread(parent), m_pAvContext(ac)
 {
     m_pVideoConver.reset(new CVideoConvert());
@@ -11,12 +11,12 @@ CH264Deocder::CH264Deocder(AVContext *ac, QObject *parent)
     });
 }
 
-CH264Deocder::~CH264Deocder()
+CH264Decoder::~CH264Decoder()
 {
     Close();
 }
 
-int CH264Deocder::nOpen(const AVCodecParameters *pCodecParamer)
+int CH264Decoder::nOpen(const AVCodecParameters *pCodecParamer)
 {
     if(m_bIsInitialzed || !pCodecParamer)
     {
@@ -76,7 +76,7 @@ int CH264Deocder::nOpen(const AVCodecParameters *pCodecParamer)
     return 0;
 }
 
-void CH264Deocder::Close()
+void CH264Decoder::Close()
 {
     m_bQuit = true;
     m_bIsInitialzed = false;
@@ -87,7 +87,7 @@ void CH264Deocder::Close()
     }
 }
 
-void CH264Deocder::run()
+void CH264Decoder::run()
 {
     AVPacketPtr pkt = nullptr;
     while(!m_bQuit && m_pVideoConver)

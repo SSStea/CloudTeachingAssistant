@@ -1,15 +1,15 @@
-#ifndef H264DEOCDER_H
-#define H264DEOCDER_H
+#ifndef H264DECODER_H
+#define H264DECODER_H
 #include <QThread>
 #include "AVCommon.h"
 
 class CVideoConvert;
-class CH264Deocder : public QThread ,public CDecodBase
+class CH264Decoder : public QThread ,public CDecodBase
 {
     Q_OBJECT
 public:
-    CH264Deocder(AVContext* ac,QObject* parent = nullptr);
-    ~CH264Deocder();
+    CH264Decoder(AVContext* ac,QObject* parent = nullptr);
+    ~CH264Decoder();
     int  nOpen(const AVCodecParameters* pCodecParamer);
     inline bool bIsFull(){return m_qVideoQueue.nSize() > 10;}
     inline void PutPacket(const AVPacketPtr packet){m_qVideoQueue.push(packet);}
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif // H264DEOCDER_H
+#endif // H264DECODER_H
